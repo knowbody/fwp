@@ -12,14 +12,14 @@
             </div>
             <!-- /input-group -->
         </div>
-        <!-- /.col-md-2 -->
+        <!-- /.span6 -->
 
         <div class="span6">
             <asp:GridView ID="gvSpiecesDetails" runat="server" class="table table-striped" Width="300px" GridLines="None" CellSpacing="-1"
                 onpageindexchanging="gvSpiecesDetails_PageIndexChanging">
             </asp:GridView>
         </div>
-        <!-- /.col-md-10 -->
+        <!-- /.span6 -->
 
     </div>
     <!-- /.row -->

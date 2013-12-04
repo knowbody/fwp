@@ -15,4 +15,8 @@ public partial class Manage_Pets : System.Web.UI.Page
     {
         Response.Redirect("Manage-Spieces");
     }
+    protected void Button2_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("Manage-Breeds");
+    }
 }

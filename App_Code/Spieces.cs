@@ -5,16 +5,23 @@ using System.Web;
 
 public class Spieces
 {
-    private string name;
+    private int id;
+    public int Id
+    {
+        get { return id; }
+        set { id = value; }
+    }
 
+    private string name;
     public string Name
     {
         get { return name; }
         set { name = value; }
     }
 
-	public Spieces(string name)
+	public Spieces(int id, string name)
 	{
         this.name = name;
+        this.id = id;
 	}
 }

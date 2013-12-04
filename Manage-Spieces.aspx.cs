@@ -15,7 +15,7 @@ public partial class Manage_Spieces : System.Web.UI.Page
     protected void BAddSpiece_Click(object sender, EventArgs e)
     {
         String spieceName = TBSpiece.Text;
-        Spieces newSpiece = DBConnectivity.addBreed(spieceName);
+        Spieces newSpiece = DBConnectivity.addSpieces(spieceName);
         loadGrid(); 
     }
 
@@ -24,19 +24,6 @@ public partial class Manage_Spieces : System.Web.UI.Page
         gvSpiecesDetails.DataSource = DBConnectivity.LoadSpieces();
         gvSpiecesDetails.AllowPaging = true;
         gvSpiecesDetails.DataBind();
-    }
-
-    private void addNewTableRow(string name)
-    {
-        TableRow row = new TableRow();
-        TableCell cellName = new TableCell();
-        cellName.Text = name;
-        TableCell cellAction = new TableCell();
-        cellAction.Text = "Ha";
-
-        row.Cells.Add(cellName);
-        row.Cells.Add(cellAction);
-        //TableSpieces.Rows.Add(row); 
     }
 
     protected void gvSpiecesDetails_PageIndexChanging(object sender, GridViewPageEventArgs e)
