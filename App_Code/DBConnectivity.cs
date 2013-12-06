@@ -69,7 +69,7 @@ namespace FWP
         {
             OleDbConnection myConnection = GetConnection();
             string myQuery = "INSERT INTO pets (name, breed_id, spieces_id, sanctuary_id, age, gender, weight, bills, rescue_date, picture_path)" +
-                             "VALUES ('" + petData[0, 1] + "', '" + petData[1, 1] + "', '" + petData[2, 1] + "', '" + petData[3, 1] + "', '" + petData[4, 1] + "', '" + petData[5, 1] + "', '" + petData[6, 1] + "', '" + petData[7, 1] + "', '" + petData[8, 1] + "', '" + petData[9, 1] + "', '" + petData[10, 1] + "')";
+                             "VALUES ('" + petData[0, 1] + "', '" + petData[1, 1] + "', '" + petData[2, 1] + "', '" + petData[3, 1] + "', '" + petData[4, 1] + "', '" + petData[5, 1] + "', '" + petData[6, 1] + "', '" + petData[7, 1] + "', '" + petData[8, 1] + "', '" + petData[9, 1] + "')";
             OleDbCommand myCommand = new OleDbCommand(myQuery, myConnection);
 
             try
@@ -396,7 +396,7 @@ namespace FWP
         {
             List<Pet> pets = new List<Pet>();
             OleDbConnection myConnection = GetConnection();
-            string myQuery = "SELECT * FROM pets WHERE breed_id = " + id;
+            string myQuery = "SELECT * FROM pets WHERE spieces_id = " + id;
             OleDbCommand myCommand = new OleDbCommand(myQuery, myConnection);
 
             try

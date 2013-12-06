@@ -240,11 +240,4 @@
 
     </div><!-- /.row-fluid -->
 
-
-    <script type="text/javascript">
-        var deletePet = function(id) {
-                
-            };
-        
-    </script>
 </asp:Content>
