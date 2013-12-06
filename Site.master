@@ -54,7 +54,10 @@
                             <ul class="nav nav-pills nav-stacked">
                                 <li><a runat="server" href="~/">Home</a></li>
                                 <li><a runat="server" href="~/View-Animals">Our Animals</a></li>
+<<<<<<< HEAD
+=======
                                  <li><a runat="server" href="~/NewClient">New Client</a></li>
+>>>>>>> eaf9a5ef2a0eddcfac54a56bef2ae71521368b91
                                 <li><a runat="server" href="~/Manage-Pets">Pets Management</a></li>
                             </ul>
                             <asp:LoginView runat="server" ViewStateMode="Disabled">

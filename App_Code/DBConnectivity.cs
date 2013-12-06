@@ -389,7 +389,11 @@ namespace FWP
             List<Pet> pets = new List<Pet>();
             OleDbConnection myConnection = GetConnection();
 
+<<<<<<< HEAD
+            string myQuery = "SELECT * FROM pets WHERE breed_id = " + id;
+=======
             string myQuery = "SELECT * FROM pets LEFT JOIN spieces ON spieces.id = breed WHERE breed_id = " + id;
+>>>>>>> eaf9a5ef2a0eddcfac54a56bef2ae71521368b91
             OleDbCommand myCommand = new OleDbCommand(myQuery, myConnection);
 
             try
@@ -480,6 +484,8 @@ namespace FWP
                 myConnection.Close();
             }
         }
+<<<<<<< HEAD
+=======
 
         
         public static Client addClient(string name, string email, string address, string tel, DateTime date, string money, string country)
@@ -532,5 +538,6 @@ namespace FWP
                 myConnection.Close();
             }
         }
+>>>>>>> eaf9a5ef2a0eddcfac54a56bef2ae71521368b91
     }
 }
