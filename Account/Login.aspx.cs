@@ -5,6 +5,7 @@ using System;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
+using FWP;
 
 public partial class Account_Login : Page
 {
@@ -15,9 +16,27 @@ public partial class Account_Login : Page
 
     protected void LogIn(object sender, EventArgs e)
     {
+        // Colecting data
         string email = TBEmail.Text;
         string password = TBPass.Text;
 
-        Session["auth_email"] = TBEmail.Text;
+        // Checking login details
+        Staff account = DBConnectivity.login(email, password);
+
+        if (account != null)
+        {
+            // Loging OK
+            Session["auth_email"] = account.email;
+            Session["first_name"] = account.firstName;
+            Response.Redirect("~/Manage-Pets");
+        }
+        else
+        {
+            // Bad details
+            ErrorMessage.Visible = true;
+            FailureText.Text = "Bad credentials. Try again.";
+        }
+
+        
     }
 }

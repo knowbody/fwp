@@ -55,12 +55,19 @@
                                 <li><a runat="server" href="~/">Home</a></li>
                                 <li><a runat="server" href="~/View-Animals">Our Animals</a></li>
                                  <li><a runat="server" href="~/NewClient">New Client</a></li>
+                                <% if (Session["auth_email"] != null) { %>
                                 <li><a runat="server" href="~/Manage-Pets">Pets Management</a></li>
+                                <% } %>
                             </ul>
                             <asp:LoginView runat="server" ViewStateMode="Disabled">
                                 <AnonymousTemplate>
                                     <ul class="nav nav-pills nav-stacked pull-right">
-                                        <li class="navbar-text"><a id="loginLink" runat="server" href="~/Account/Login">Staff Login</a></li>
+                                        <% if (Session["auth_email"] == null) { %>
+                                        <li class="navbar-text"><a id="login" runat="server" href="~/Account/Login">Staff Login</a></li>
+                                        <% } else { %>
+                                        <li class="navbar-text">Hi, <%=Session["first_name"]%></li>
+                                        <li class="navbar-text"><a id="logout" runat="server" href="~/Account/Logout">Logout</a></li>
+                                        <% } %>
                                     </ul>
                                 </AnonymousTemplate>
                                 <LoggedInTemplate>

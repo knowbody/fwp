@@ -331,6 +331,41 @@ namespace FWP
             }
         }
 
+        // Method that checks login details
+        public static Staff login(string email, string password)
+        {
+            OleDbConnection myConnection = GetConnection();
+            string myQuery =  "SELECT * FROM staff WHERE email = '" + email + "' AND password = '" + password + "'";
+            OleDbCommand myCommand = new OleDbCommand(myQuery, myConnection);
+
+            try
+            {
+                myConnection.Open();
+                OleDbDataReader myReader = myCommand.ExecuteReader();
+
+                if (myReader.HasRows) {
+                    while (myReader.Read())
+                    {
+                        return new Staff(int.Parse(myReader["id"].ToString()), myReader["first_name"].ToString(), myReader["last_name"].ToString(), myReader["email"].ToString(), myReader["password"].ToString());
+                    }
+                    return null;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Exception in DBHandler", ex);
+                return null;
+            }
+            finally
+            {
+                myConnection.Close();
+            }
+        }
+
         public static Client addClient(string name, string email, string address, string tel, DateTime date, string money, string country)
         {
             OleDbConnection myConnection = GetConnection();

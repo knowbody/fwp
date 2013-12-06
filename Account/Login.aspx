@@ -10,7 +10,6 @@
     <div class="row-fluid">
         <div class="span7">
             <section id="loginForm">
-                
                 <fieldset class="form-horizontal">
                     <legend></legend>
                       <asp:PlaceHolder runat="server" ID="ErrorMessage" Visible="false">
@@ -24,7 +23,7 @@
                         <div class="controls">
                             <asp:TextBox runat="server" ID="TBEmail" />
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="TBEmail"
-                                CssClass="text-error" ErrorMessage="The user name field is required." />
+                                CssClass="text-error" ErrorMessage="The email field is required." />
                         </div>
                     </div>
 
@@ -41,8 +40,8 @@
                     </div>
                 </fieldset>
             </section>
-        </div>
 
+        </div>
         
     </div>
 </asp:Content>

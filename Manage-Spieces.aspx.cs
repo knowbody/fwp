@@ -10,6 +10,12 @@ public partial class Manage_Spieces : Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+        // Check if user is logged in
+        if (Session["auth_email"] == null)
+        {
+            Response.Redirect("~/");
+        }
+
         loadGrid(); 
     }
 

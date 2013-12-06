@@ -10,6 +10,12 @@ public partial class Manage_Pets : Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+        // Check if user is logged in
+        if (Session["auth_email"] == null)
+        {
+            Response.Redirect("~/");
+        }
+
         if (!Page.IsPostBack)
         {
             // Loading spieces dropdownlist
