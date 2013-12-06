@@ -65,11 +65,11 @@ namespace FWP
         }
 
         // Add new pet to database
-        public static Boolean addPet(string[,] petData) 
+        public static Boolean addPet(string[,] petData)
         {
             OleDbConnection myConnection = GetConnection();
-            string myQuery = "INSERT INTO pets (name, breed_id, sanctuary_id, age, gender, weight, bills, rescue_date, picture_path)" +
-                             "VALUES ('" + petData[0, 1] + "', '" + petData[1, 1] + "', '" + petData[2, 1] + "', '" + petData[3, 1] + "', '" + petData[4, 1] + "', '" + petData[5, 1] + "', '" + petData[6, 1] + "', '" + petData[7, 1] + "', '" + petData[8, 1] + "')";
+            string myQuery = "INSERT INTO pets (name, breed_id, spieces_id, sanctuary_id, age, gender, weight, bills, rescue_date, picture_path)" +
+                             "VALUES ('" + petData[0, 1] + "', '" + petData[1, 1] + "', '" + petData[2, 1] + "', '" + petData[3, 1] + "', '" + petData[4, 1] + "', '" + petData[5, 1] + "', '" + petData[6, 1] + "', '" + petData[7, 1] + "', '" + petData[8, 1] + "', '" + petData[9, 1] + "', '" + petData[10, 1] + "')";
             OleDbCommand myCommand = new OleDbCommand(myQuery, myConnection);
 
             try
@@ -300,15 +300,19 @@ namespace FWP
                 OleDbDataReader myReader = myCommand.ExecuteReader();
 
                 List<Breed> breeds = LoadBreeds();
+                List<Spieces> spieces = LoadSpieces();
 
                 while (myReader.Read())
                 {
                     Breed breed = FindBreed(breeds, int.Parse(myReader["breed_id"].ToString()));
-                    if (breed != null)
+                    Spieces spiece = FindSpieces(spieces, int.Parse(myReader["spieces_id"].ToString()));
+
+                    if (breed != null && spiece != null)
                     {
                         Pet pet = new Pet(int.Parse(myReader["id"].ToString()),
                                           myReader["name"].ToString(),
                                           breed,
+                                          spiece,
                                           int.Parse(myReader["sanctuary_id"].ToString()),
                                           int.Parse(myReader["age"].ToString()),
                                           int.Parse(myReader["gender"].ToString()),
@@ -319,7 +323,7 @@ namespace FWP
                                     );
                         pets.Add(pet);
                     }
-                    
+
                 }
                 return pets;
             }
@@ -349,15 +353,19 @@ namespace FWP
                 OleDbDataReader myReader = myCommand.ExecuteReader();
 
                 List<Breed> breeds = LoadBreeds();
+                List<Spieces> spieces = LoadSpieces();
 
                 while (myReader.Read())
                 {
                     Breed breed = FindBreed(breeds, int.Parse(myReader["breed_id"].ToString()));
-                    if (breed != null)
+                    Spieces spiece = FindSpieces(spieces, int.Parse(myReader["spieces_id"].ToString()));
+
+                    if (breed != null && spiece != null)
                     {
                         Pet pet = new Pet(int.Parse(myReader["id"].ToString()),
                                           myReader["name"].ToString(),
                                           breed,
+                                          spiece,
                                           int.Parse(myReader["sanctuary_id"].ToString()),
                                           int.Parse(myReader["age"].ToString()),
                                           int.Parse(myReader["gender"].ToString()),
@@ -368,7 +376,7 @@ namespace FWP
                                     );
                         pets.Add(pet);
                     }
-                    
+
                 }
                 return pets;
             }
@@ -388,12 +396,7 @@ namespace FWP
         {
             List<Pet> pets = new List<Pet>();
             OleDbConnection myConnection = GetConnection();
-
-<<<<<<< HEAD
             string myQuery = "SELECT * FROM pets WHERE breed_id = " + id;
-=======
-            string myQuery = "SELECT * FROM pets LEFT JOIN spieces ON spieces.id = breed WHERE breed_id = " + id;
->>>>>>> eaf9a5ef2a0eddcfac54a56bef2ae71521368b91
             OleDbCommand myCommand = new OleDbCommand(myQuery, myConnection);
 
             try
@@ -402,15 +405,19 @@ namespace FWP
                 OleDbDataReader myReader = myCommand.ExecuteReader();
 
                 List<Breed> breeds = LoadBreeds();
+                List<Spieces> spieces = LoadSpieces();
 
                 while (myReader.Read())
                 {
                     Breed breed = FindBreed(breeds, int.Parse(myReader["breed_id"].ToString()));
-                    if (breed != null)
+                    Spieces spiece = FindSpieces(spieces, int.Parse(myReader["spieces_id"].ToString()));
+
+                    if (breed != null && spiece != null)
                     {
                         Pet pet = new Pet(int.Parse(myReader["id"].ToString()),
                                           myReader["name"].ToString(),
                                           breed,
+                                          spiece,
                                           int.Parse(myReader["sanctuary_id"].ToString()),
                                           int.Parse(myReader["age"].ToString()),
                                           int.Parse(myReader["gender"].ToString()),
@@ -451,15 +458,19 @@ namespace FWP
                 OleDbDataReader myReader = myCommand.ExecuteReader();
 
                 List<Breed> breeds = LoadBreeds();
+                List<Spieces> spieces = LoadSpieces();
 
                 while (myReader.Read())
                 {
                     Breed breed = FindBreed(breeds, int.Parse(myReader["breed_id"].ToString()));
-                    if (breed != null)
+                    Spieces spiece = FindSpieces(spieces, int.Parse(myReader["spieces_id"].ToString()));
+
+                    if (breed != null && spiece != null)
                     {
                         Pet pet = new Pet(int.Parse(myReader["id"].ToString()),
                                           myReader["name"].ToString(),
                                           breed,
+                                          spiece,
                                           int.Parse(myReader["sanctuary_id"].ToString()),
                                           int.Parse(myReader["age"].ToString()),
                                           int.Parse(myReader["gender"].ToString()),
@@ -484,10 +495,8 @@ namespace FWP
                 myConnection.Close();
             }
         }
-<<<<<<< HEAD
-=======
 
-        
+
         public static Client addClient(string name, string email, string address, string tel, DateTime date, string money, string country)
         {
             OleDbConnection myConnection = GetConnection();
@@ -538,6 +547,5 @@ namespace FWP
                 myConnection.Close();
             }
         }
->>>>>>> eaf9a5ef2a0eddcfac54a56bef2ae71521368b91
     }
 }
