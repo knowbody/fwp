@@ -53,9 +53,10 @@ public partial class Manage_Pets : Page
         }
 
         // Collecting data
-        string[,] petData = new string[9, 2] { 
+        string[,] petData = new string[10, 2] { 
             { "name", TBName.Text }, 
             { "breed_id", DDLBreeds.SelectedValue },
+            { "spieces_id", DDLSpieces.SelectedValue },
             { "sanctuary_id", DDLSanctuary.SelectedValue },
             { "age", TBAge.Text },
             { "gender", RBLGender.SelectedValue.ToString() },
