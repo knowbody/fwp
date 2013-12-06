@@ -63,7 +63,6 @@
                        runat="server" />
                     <asp:DropDownList ID="DDLBreeds" 
                         OnDataBound="DDLBreeds_OnDataBound"
-                        disabled="disabled"
                         runat="server">
                     </asp:DropDownList>
                 </div><!-- /.field -->

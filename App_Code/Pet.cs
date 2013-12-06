@@ -53,12 +53,12 @@ namespace FWP
             get { return ""; }
         }
 
-        public Pet(int id, string name, Breed breed, int sanctuary, int age, int gender, double weight, double bills, DateTime rescueD, string picturePath)
+        public Pet(int id, string name, Breed breed, Spieces spieces, int sanctuary, int age, int gender, double weight, double bills, DateTime rescueD, string picturePath)
 	    {
             this.id = id;
             this.name = name;
             this.breed = breed;
-            this.spieces = breed.spieces;
+            this.spieces = spieces;
             this.sanctuary = sanctuary;
             this.age = age;
             this.gender = gender;
