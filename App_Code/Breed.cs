@@ -3,41 +3,35 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-public class Breed
+namespace FWP
 {
-    public int id;
-    public int Id
+    public class Breed
     {
-        get { return id; }
-        set { id = value; }
-    }
+        public int id {get; private set;} 
+        public string name {get; private set;}
+        public Spieces spieces {get; private set;}
 
-    public string name;
-    public string Name
-    {
-        get { return name; }
-        set { name = value; }
-    }
+        public double foodCost { get; private set; }
+        public String FormatedFoodCost
+        {
+            get { return foodCost.ToString("C2"); }
+        }
 
-    public string spieceName;
-    public string SpieceName
-    {
-        get { return spieceName; }
-        set { spieceName = value; }
-    }
+        public double housCost { get; private set; }
+        public String FormatedHousCost
+        {
+            get { return housCost.ToString("C2"); }
+        }
 
-    private Spieces spieces;
-    public Spieces Spieces
-    {
-        get { return spieces; }
-        set { spieces = value; }
-    }
 
-	public Breed(int id, string name, Spieces spieces)
-	{
-        this.id = id;
-        this.name = name;
-        this.spieces = spieces;
-        this.spieceName = spieces.Name;
-	}
+        public Breed(int id, string name, Spieces spieces, double foodCost, double housCost)
+	    {
+            this.id = id;
+            this.name = name;
+            this.spieces = spieces;
+            this.foodCost = foodCost;
+            this.housCost = housCost;
+	    }
+
+    }
 }

@@ -3,25 +3,27 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-public class Spieces
-{
-    private int id;
-    public int Id
+namespace FWP { 
+    public class Spieces
     {
-        get { return id; }
-        set { id = value; }
-    }
+        private int id;
+        public int Id
+        {
+            get { return id; }
+            set { id = value; }
+        }
 
-    private string name;
-    public string Name
-    {
-        get { return name; }
-        set { name = value; }
-    }
+        private string name;
+        public string Name
+        {
+            get { return name; }
+            set { name = value; }
+        }
 
-	public Spieces(int id, string name)
-	{
-        this.name = name;
-        this.id = id;
-	}
+	    public Spieces(int id, string name)
+	    {
+            this.name = name;
+            this.id = id;
+	    }
+    }
 }

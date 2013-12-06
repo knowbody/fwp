@@ -46,17 +46,13 @@
                     </div>
                 </fieldset>
                 <p>
-                    <asp:HyperLink runat="server" ID="RegisterHyperLink" ViewStateMode="Disabled">Register</asp:HyperLink>
+                    <asp:HyperLink runat="server" ID="RegisterHyperLink" ViewStateMode="Enabled">Register</asp:HyperLink>
                     if you don't have a local account.
                 </p>
             </section>
         </div>
 
-        <div class="span5">
-            <section id="socialLoginForm">
-                <uc:OpenAuthProviders runat="server" ID="OpenAuthLogin" />
-            </section>
-        </div>
+        
     </div>
 </asp:Content>
 
