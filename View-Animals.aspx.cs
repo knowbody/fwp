@@ -88,13 +88,13 @@ public partial class View_Animals : System.Web.UI.Page
                 pets = DBConnectivity.LoadPets();
                 break;
             case 1:
-                pets = DBConnectivity.LoadPetsByBreed(selValueId);
+                pets = DBConnectivity.LoadPets("breed", selValueId);
                 break;
             case 2:
-                pets = DBConnectivity.LoadPetsBySpieces(selValueId);
+                pets = DBConnectivity.LoadPets("spieces", selValueId);
                 break;
             default:
-                pets = DBConnectivity.LoadPetsBySanctuary(selValueId);
+                pets = DBConnectivity.LoadPets("sanctuary", selValueId);
                 break;
         }
         

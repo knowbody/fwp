@@ -135,6 +135,29 @@ namespace FWP
             }
         }
 
+        // Delete breed in the DB
+        public static void DeleteBreed(string id)
+        {
+            OleDbConnection myConnection = GetConnection();
+
+            string myQuery = "DELETE FROM breeds WHERE ID = " + id + "";
+            OleDbCommand myCommand = new OleDbCommand(myQuery, myConnection);
+
+            try
+            {
+                myConnection.Open();
+                myCommand.ExecuteReader();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Exception in DBHandler", ex);
+            }
+            finally
+            {
+                myConnection.Close();
+            }
+        }
+
         // Search for the specific spieces by ID
         public static Spieces FindSpieces(List<Spieces> spieces, int spieceId)
         {
@@ -159,29 +182,6 @@ namespace FWP
                 }
             }
             return null;
-        }
-
-        // Delete breed in the DB
-        public static void DeleteBreed(string id)
-        {
-            OleDbConnection myConnection = GetConnection();
-
-            string myQuery = "DELETE FROM breeds WHERE ID = " + id + "";
-            OleDbCommand myCommand = new OleDbCommand(myQuery, myConnection);
-
-            try
-            {
-                myConnection.Open();
-                myCommand.ExecuteReader();
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Exception in DBHandler", ex);
-            }
-            finally
-            {
-                myConnection.Close();
-            }
         }
 
         // Method that returns a list of Spieces objects with the details from the DB
@@ -216,47 +216,23 @@ namespace FWP
         }
 
         // Method that returns a list of Breeds objects with the details from the DB
-        public static List<Breed> LoadBreeds()
+        public static List<Breed> LoadBreeds(string by = "", string id = "")
         {
             List<Breed> breeds = new List<Breed>();
             OleDbConnection myConnection = GetConnection();
 
-            string myQuery = "SELECT id, spieces_id, name, food_cost, housing_cost FROM breeds";
-            OleDbCommand myCommand = new OleDbCommand(myQuery, myConnection);
-
-            try
+            string myQuery = "";
+            // Deciding how to load breeds
+            switch (by)
             {
-                myConnection.Open();
-                OleDbDataReader myReader = myCommand.ExecuteReader();
-
-                List<Spieces> spieces = LoadSpieces();
-
-                while (myReader.Read())
-                {
-                    Spieces spiece = FindSpieces(spieces, int.Parse(myReader["spieces_id"].ToString()));
-                    Breed breed = new Breed(int.Parse(myReader["id"].ToString()), myReader["name"].ToString(), spiece, double.Parse(myReader["food_cost"].ToString()), double.Parse(myReader["housing_cost"].ToString()));
-                    breeds.Add(breed);
-                }
-                return breeds;
+                case "spieces":
+                    myQuery = "SELECT * FROM breeds WHERE spieces_id = " + id;
+                    break;
+                default:
+                    myQuery = "SELECT * FROM breeds";
+                    break;
             }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Exception in DBHandler", ex);
-                return null;
-            }
-            finally
-            {
-                myConnection.Close();
-            }
-        }
 
-        // Method that returns a list of Breeds by spieces id
-        public static List<Breed> LoadBreedsBySpieces(string id)
-        {
-            List<Breed> breeds = new List<Breed>();
-            OleDbConnection myConnection = GetConnection();
-
-            string myQuery = "SELECT id, spieces_id, name, food_cost, housing_cost FROM breeds WHERE spieces_id = " + id;
             OleDbCommand myCommand = new OleDbCommand(myQuery, myConnection);
 
             try
@@ -286,12 +262,29 @@ namespace FWP
         }
 
         // Method that returns a list of Pets objects with the details from the DB
-        public static List<Pet> LoadPets()
+        public static List<Pet> LoadPets(string by = "", string id = "")
         {
             List<Pet> pets = new List<Pet>();
             OleDbConnection myConnection = GetConnection();
 
-            string myQuery = "SELECT * FROM pets";
+            string myQuery = "";
+            // Deciding how to load pets
+            switch (by)
+            {
+                case "breed":
+                    myQuery = "SELECT * FROM pets WHERE breed_id = " + id;
+                    break;
+                case "spieces":
+                    myQuery = "SELECT * FROM pets WHERE spieces_id = " + id;
+                    break;
+                case "sanctuary":
+                    myQuery = "SELECT * FROM pets WHERE sanctuary_id = " + id;
+                    break;
+                default:
+                    myQuery = "SELECT * FROM pets";
+                    break;
+            }
+            
             OleDbCommand myCommand = new OleDbCommand(myQuery, myConnection);
 
             try
@@ -337,165 +330,6 @@ namespace FWP
                 myConnection.Close();
             }
         }
-
-        // Method that returns a list of Pets by breed id
-        public static List<Pet> LoadPetsByBreed(string id)
-        {
-            List<Pet> pets = new List<Pet>();
-            OleDbConnection myConnection = GetConnection();
-
-            string myQuery = "SELECT * FROM pets WHERE breed_id = " + id;
-            OleDbCommand myCommand = new OleDbCommand(myQuery, myConnection);
-
-            try
-            {
-                myConnection.Open();
-                OleDbDataReader myReader = myCommand.ExecuteReader();
-
-                List<Breed> breeds = LoadBreeds();
-                List<Spieces> spieces = LoadSpieces();
-
-                while (myReader.Read())
-                {
-                    Breed breed = FindBreed(breeds, int.Parse(myReader["breed_id"].ToString()));
-                    Spieces spiece = FindSpieces(spieces, int.Parse(myReader["spieces_id"].ToString()));
-
-                    if (breed != null && spiece != null)
-                    {
-                        Pet pet = new Pet(int.Parse(myReader["id"].ToString()),
-                                          myReader["name"].ToString(),
-                                          breed,
-                                          spiece,
-                                          int.Parse(myReader["sanctuary_id"].ToString()),
-                                          int.Parse(myReader["age"].ToString()),
-                                          int.Parse(myReader["gender"].ToString()),
-                                          double.Parse(myReader["weight"].ToString()),
-                                          double.Parse(myReader["bills"].ToString()),
-                                          DateTime.Parse(myReader["rescue_date"].ToString()),
-                                          myReader["picture_path"].ToString()
-                                    );
-                        pets.Add(pet);
-                    }
-
-                }
-                return pets;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Exception in DBHandler", ex);
-                return null;
-            }
-            finally
-            {
-                myConnection.Close();
-            }
-        }
-
-        // Method that returns a list of Pets by breed id
-        public static List<Pet> LoadPetsBySpieces(string id)
-        {
-            List<Pet> pets = new List<Pet>();
-            OleDbConnection myConnection = GetConnection();
-            string myQuery = "SELECT * FROM pets WHERE spieces_id = " + id;
-            OleDbCommand myCommand = new OleDbCommand(myQuery, myConnection);
-
-            try
-            {
-                myConnection.Open();
-                OleDbDataReader myReader = myCommand.ExecuteReader();
-
-                List<Breed> breeds = LoadBreeds();
-                List<Spieces> spieces = LoadSpieces();
-
-                while (myReader.Read())
-                {
-                    Breed breed = FindBreed(breeds, int.Parse(myReader["breed_id"].ToString()));
-                    Spieces spiece = FindSpieces(spieces, int.Parse(myReader["spieces_id"].ToString()));
-
-                    if (breed != null && spiece != null)
-                    {
-                        Pet pet = new Pet(int.Parse(myReader["id"].ToString()),
-                                          myReader["name"].ToString(),
-                                          breed,
-                                          spiece,
-                                          int.Parse(myReader["sanctuary_id"].ToString()),
-                                          int.Parse(myReader["age"].ToString()),
-                                          int.Parse(myReader["gender"].ToString()),
-                                          double.Parse(myReader["weight"].ToString()),
-                                          double.Parse(myReader["bills"].ToString()),
-                                          DateTime.Parse(myReader["rescue_date"].ToString()),
-                                          myReader["picture_path"].ToString()
-                                    );
-                        pets.Add(pet);
-                    }
-
-                }
-                return pets;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Exception in DBHandler", ex);
-                return null;
-            }
-            finally
-            {
-                myConnection.Close();
-            }
-        }
-
-        // Method that returns a list of Pets by breed id
-        public static List<Pet> LoadPetsBySanctuary(string id)
-        {
-            List<Pet> pets = new List<Pet>();
-            OleDbConnection myConnection = GetConnection();
-
-            string myQuery = "SELECT * FROM pets WHERE sanctuary_id = " + id;
-            OleDbCommand myCommand = new OleDbCommand(myQuery, myConnection);
-
-            try
-            {
-                myConnection.Open();
-                OleDbDataReader myReader = myCommand.ExecuteReader();
-
-                List<Breed> breeds = LoadBreeds();
-                List<Spieces> spieces = LoadSpieces();
-
-                while (myReader.Read())
-                {
-                    Breed breed = FindBreed(breeds, int.Parse(myReader["breed_id"].ToString()));
-                    Spieces spiece = FindSpieces(spieces, int.Parse(myReader["spieces_id"].ToString()));
-
-                    if (breed != null && spiece != null)
-                    {
-                        Pet pet = new Pet(int.Parse(myReader["id"].ToString()),
-                                          myReader["name"].ToString(),
-                                          breed,
-                                          spiece,
-                                          int.Parse(myReader["sanctuary_id"].ToString()),
-                                          int.Parse(myReader["age"].ToString()),
-                                          int.Parse(myReader["gender"].ToString()),
-                                          double.Parse(myReader["weight"].ToString()),
-                                          double.Parse(myReader["bills"].ToString()),
-                                          DateTime.Parse(myReader["rescue_date"].ToString()),
-                                          myReader["picture_path"].ToString()
-                                    );
-                        pets.Add(pet);
-                    }
-
-                }
-                return pets;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Exception in DBHandler", ex);
-                return null;
-            }
-            finally
-            {
-                myConnection.Close();
-            }
-        }
-
 
         public static Client addClient(string name, string email, string address, string tel, DateTime date, string money, string country)
         {

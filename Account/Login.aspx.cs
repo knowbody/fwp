@@ -15,6 +15,9 @@ public partial class Account_Login : Page
 
     protected void LogIn(object sender, EventArgs e)
     {
-        
+        string email = TBEmail.Text;
+        string password = TBPass.Text;
+
+        Session["auth_email"] = TBEmail.Text;
     }
 }

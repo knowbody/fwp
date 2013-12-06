@@ -165,6 +165,16 @@
                </div><!-- /.field -->
 
                 <div class="field">
+                    <asp:Label ID="LabelRescueDate"
+                       Text="Rescue Date"
+                       AssociatedControlID="CalendarRescue"
+                       runat="server" />
+                    <asp:Calendar ID="CalendarRescue" runat="server"></asp:Calendar>
+               </div><!-- /.field -->
+
+                <br />
+
+                <div class="field">
                     <asp:Label ID="LabelPicture"
                        Text="Picture"
                        AssociatedControlID="FileUploadPicture"
@@ -174,18 +184,8 @@
                         runat="server"
                         CssClass="text-error" 
                         ErrorMessage="Required Field" 
-                        ControlToValidate="FileUploadPicture" /><br />
+                        ControlToValidate="FileUploadPicture" />
                    <asp:FileUpload ID="FileUploadPicture" runat="server" />
-               </div><!-- /.field -->
-
-               <br />
-
-               <div class="field">
-                    <asp:Label ID="LabelRescueDate"
-                       Text="Rescue Date"
-                       AssociatedControlID="CalendarRescue"
-                       runat="server" />
-                    <asp:Calendar ID="CalendarRescue" runat="server"></asp:Calendar>
                </div><!-- /.field -->
 
                <br />

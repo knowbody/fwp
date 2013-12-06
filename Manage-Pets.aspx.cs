@@ -180,7 +180,7 @@ public partial class Manage_Pets : Page
         {
             // Loading breeds dropdownlist by spieces id
             DDLBreeds.Attributes.Remove("disabled");
-            DDLBreeds.DataSource = DBConnectivity.LoadBreedsBySpieces(DDLSpieces.SelectedValue);
+            DDLBreeds.DataSource = DBConnectivity.LoadBreeds("spieces", DDLSpieces.SelectedValue);
             DDLBreeds.DataTextField = "name";
             DDLBreeds.DataValueField = "id";
             DDLBreeds.DataBind();
