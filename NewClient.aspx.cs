@@ -117,6 +117,9 @@ public partial class NewClient : System.Web.UI.Page
                 DDLFilter.Items.Clear();
                 DDLFilter.Items.Insert(0, new ListItem("Select value...", "0"));
                 DDLFilter.Attributes.Add("disabled", "disabled");
+                DDLPet.Items.Clear();
+                DDLPet.Items.Insert(0, new ListItem("Select value...", "0"));
+                DDLPet.Attributes.Add("disabled", "disabled");
                 break;
             case 1:
                 // Loading breeds to dropdownlist
@@ -155,12 +158,6 @@ public partial class NewClient : System.Web.UI.Page
 
         switch (selValue)
         {
-            case 0:
-                // Emptying and disabling breeds dropdownlist
-                DDLPet.Items.Clear();
-                DDLPet.Items.Insert(0, new ListItem("Select value...", "0"));
-                DDLPet.Attributes.Add("disabled", "disabled");
-                break;
             case 1:
                 // Loading breeds to dropdownlist
                 DDLPet.Attributes.Remove("disabled");
@@ -174,7 +171,7 @@ public partial class NewClient : System.Web.UI.Page
                 // Loading spieces to dropdownlist
                 DDLPet.Attributes.Remove("disabled");
                 DDLPet.Items.Clear();
-                DDLPet.DataSource = DBConnectivity.LoadPets("species", setPet);
+                DDLPet.DataSource = DBConnectivity.LoadPets("spieces", setPet);
                 DDLPet.DataTextField = "name";
                 DDLPet.DataValueField = "id";
                 DDLPet.DataBind();
