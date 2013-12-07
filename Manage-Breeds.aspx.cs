@@ -22,6 +22,7 @@ public partial class Manage_Breeds : Base
         loadGrid();
     }
 
+    // Handling adding new breed button click
     protected void BAddBreed_Click(object sender, EventArgs e)
     {
         // Collecting data
@@ -38,21 +39,17 @@ public partial class Manage_Breeds : Base
         // Checking if record was added
         if (added)
         {
-            displaySuccessMessage();
+            displaySuccessMessage("New breed was added successfully.");
             // Reloading GridView
             loadGridLast();
         }
         else
         {
-            displayErrorMessage();
+            displayErrorMessage("Error while creating breed. Please try again.");
         }
 
         // Reseting form
         resetForm();
-
-        // Displaying success message
-        SuccessMessage.Visible = true;
-        SuccessText.Text = "New breed was created.";
     }
 
     // Reseting form to default state
@@ -64,16 +61,25 @@ public partial class Manage_Breeds : Base
         TBHousingCosts.Text = "";
     }
 
-    private void displaySuccessMessage()
+    private void displaySuccessMessage(string message)
     {
-        AppHelper.displaySuccessMessage(SuccessMessage, SuccessText, "New breed was created.");
+        AppHelper.displaySuccessMessage(SuccessMessage, SuccessText, message);
         AppHelper.hideErrorMessage(ErrorMessage, ErrorText);
+        AppHelper.hideWarningMessage(WarningMessage, WarningText);
     }
 
-    private void displayErrorMessage()
+    private void displayErrorMessage(string message)
     {
-        AppHelper.displayErrorMessage(ErrorMessage, ErrorText);
+        AppHelper.displayErrorMessage(ErrorMessage, ErrorText, message);
         AppHelper.hideSuccessMessage(SuccessMessage, SuccessText);
+        AppHelper.hideWarningMessage(WarningMessage, WarningText);
+    }
+
+    private void displayWarningMessage(string message)
+    {
+        AppHelper.displayWarningMessage(WarningMessage, WarningText, message);
+        AppHelper.hideSuccessMessage(SuccessMessage, SuccessText);
+        AppHelper.hideErrorMessage(ErrorMessage, ErrorText);
     }
 
     // Load grid with fresh data from data source
@@ -110,9 +116,7 @@ public partial class Manage_Breeds : Base
         loadGrid();
 
         // Displaying warning message
-        AppHelper.displayWarningMessage(WarningMessage, WarningText, "Breed was deleted successfully");
-        AppHelper.hideSuccessMessage(SuccessMessage, SuccessText);
-        AppHelper.hideErrorMessage(ErrorMessage, ErrorText);
+        displayWarningMessage("Breed was deleted successfully");
     }
 
     // Binding javascript confirm window to every delete button

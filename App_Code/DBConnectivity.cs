@@ -12,7 +12,7 @@ namespace FWP
         private static OleDbConnection GetConnection()
         {
             string connString;
-            connString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + AppDomain.CurrentDomain.BaseDirectory + "FWP.accdb";
+            connString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + AppDomain.CurrentDomain.BaseDirectory + "App_Data/FWP.accdb";
             return new OleDbConnection(connString);
         }
 

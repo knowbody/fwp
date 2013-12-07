@@ -29,6 +29,7 @@ public partial class Manage_Pets : Base
         loadGrid();
     }
 
+    // Handling adding new pet button click
     protected void BAddPet_Click(object sender, EventArgs e)
     {
         // Checking if breed and spieces was selected
@@ -80,13 +81,13 @@ public partial class Manage_Pets : Base
         // Checking if record was added
         if (added)
         {
-            displaySuccessMessage();
+            displaySuccessMessage("New pet was created successfully.");
             // Reloading GridView
             loadGridLast();
         }
         else 
         {
-            displayErrorMessage();
+            displayErrorMessage("Error while creating pet. Please try again.");
         }
 
         // Reseting form
@@ -108,19 +109,21 @@ public partial class Manage_Pets : Base
         CalendarRescue.SelectedDates.Clear(); 
     }
 
-    private void displaySuccessMessage() 
+    private void displaySuccessMessage(string message)
     {
-        AppHelper.displaySuccessMessage(SuccessMessage, SuccessText, "New pet was created.");
+        AppHelper.displaySuccessMessage(SuccessMessage, SuccessText, message);
         AppHelper.hideErrorMessage(ErrorMessage, ErrorText);
+        AppHelper.hideWarningMessage(WarningMessage, WarningText);
     }
 
-    private void displayErrorMessage(string message = "")
+    private void displayErrorMessage(string message)
     {
         AppHelper.displayErrorMessage(ErrorMessage, ErrorText, message);
         AppHelper.hideSuccessMessage(SuccessMessage, SuccessText);
+        AppHelper.hideWarningMessage(WarningMessage, WarningText);
     }
 
-    private void displayWarningMessage(string message = "")
+    private void displayWarningMessage(string message)
     {
         AppHelper.displayWarningMessage(WarningMessage, WarningText, message);
         AppHelper.hideSuccessMessage(SuccessMessage, SuccessText);

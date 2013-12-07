@@ -16,6 +16,7 @@ public partial class Manage_Users : Base
         loadGrid();
     }
 
+    // Handling adding new staff member button click
     protected void BAddStaff_Click(object sender, EventArgs e)
     {
         // Collecting data
@@ -72,12 +73,18 @@ public partial class Manage_Users : Base
         {
             displayErrorMessage("Error adding member. Please try again.");
         }
+
+        // Reseting form
+        resetForm();
     }
 
     // Reseting form to default state
     private void resetForm()
     {
         TBFirstName.Text = "";
+        TBLastName.Text = "";
+        TBEmail.Text = "";
+        DDLAccess.ClearSelection();
     }
 
     private void displaySuccessMessage(string message = "")
@@ -91,6 +98,7 @@ public partial class Manage_Users : Base
     {
         AppHelper.displayErrorMessage(ErrorMessage, ErrorText, message);
         AppHelper.hideSuccessMessage(SuccessMessage, SuccessText);
+        AppHelper.hideWarningMessage(SuccessMessage, SuccessText);
     }
 
     private void displayWarningMessage(string message = "")
@@ -147,9 +155,7 @@ public partial class Manage_Users : Base
         loadGrid();
 
         // Displaying warning message
-        AppHelper.displayWarningMessage(WarningMessage, WarningText, "Member was deleted successfully");
-        AppHelper.hideSuccessMessage(SuccessMessage, SuccessText);
-        AppHelper.hideErrorMessage(ErrorMessage, ErrorText);
+        displayWarningMessage("Member was deleted successfully");
     }
 
 }

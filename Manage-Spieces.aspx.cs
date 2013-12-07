@@ -14,6 +14,7 @@ public partial class Manage_Spieces : Base
         loadGrid(); 
     }
 
+    // Handling adding new species button click
     protected void BAddSpiece_Click(object sender, EventArgs e)
     {
         // Collecting data
@@ -25,18 +26,14 @@ public partial class Manage_Spieces : Base
         // Checking if record was added
         if (added)
         {
-            displaySuccessMessage();
+            displaySuccessMessage("New spieces was created successfully.");
             // Reloading GridView
             loadGridLast();
         }
         else
         {
-            displayErrorMessage();
+            displayErrorMessage("Error adding spieces. Please try again.");
         }
-
-        // Displaying success message
-        SuccessMessage.Visible = true;
-        SuccessText.Text = "New spieces was created.";
 
         // Reseting form
         resetForm();
@@ -48,18 +45,25 @@ public partial class Manage_Spieces : Base
         TBSpiece.Text = "";
     }
 
-    private void displaySuccessMessage()
+    private void displaySuccessMessage(string message)
     {
-        AppHelper.displaySuccessMessage(SuccessMessage, SuccessText, "New spieces was created.");
+        AppHelper.displaySuccessMessage(SuccessMessage, SuccessText, message);
         AppHelper.hideErrorMessage(ErrorMessage, ErrorText);
         AppHelper.hideWarningMessage(WarningMessage, WarningText);
     }
 
-    private void displayErrorMessage()
+    private void displayErrorMessage(string message)
     {
-        AppHelper.displayErrorMessage(ErrorMessage, ErrorText);
+        AppHelper.displayErrorMessage(ErrorMessage, ErrorText, message);
         AppHelper.hideSuccessMessage(SuccessMessage, SuccessText);
         AppHelper.hideWarningMessage(WarningMessage, WarningText);
+    }
+
+    private void displayWarningMessage(string message)
+    {
+        AppHelper.displayWarningMessage(WarningMessage, WarningText, message);
+        AppHelper.hideSuccessMessage(SuccessMessage, SuccessText);
+        AppHelper.hideErrorMessage(ErrorMessage, ErrorText);
     }
 
     // Load grid with fresh data from data source
@@ -96,9 +100,7 @@ public partial class Manage_Spieces : Base
         loadGrid();
 
         // Displaying warning message
-        AppHelper.displayWarningMessage(WarningMessage, WarningText, "Spieces was deleted successfully");
-        AppHelper.hideSuccessMessage(SuccessMessage, SuccessText);
-        AppHelper.hideErrorMessage(ErrorMessage, ErrorText);
+        displayWarningMessage("Spieces was deleted successfully");
     }
 
     // Binding javascript confirm window to every delete button
