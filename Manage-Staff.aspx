@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Manage Staff" Language="C#" AutoEventWireup="true" MasterPageFile="~/Site.Master" CodeFile="Manage-Users.aspx.cs" Inherits="Manage_Users" %>
+﻿<%@ Page Title="Manage Staff" Language="C#" AutoEventWireup="true" MasterPageFile="~/Site.Master" CodeFile="Manage-Staff.aspx.cs" Inherits="Manage_Users" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <h3>Manage Staff</h3>
@@ -132,7 +132,7 @@
                     <asp:boundfield datafield="ID" headertext="Id"/>
                     <asp:boundfield datafield="FullName" headertext="Name"/>
                     <asp:boundfield datafield="Email" headertext="Email"/>
-                    <asp:boundfield datafield="Access" headertext="Access Level"/>
+                    <asp:boundfield datafield="AccessLevelName" headertext="Access Level"/>
                     <asp:CommandField ShowDeleteButton="True" ControlStyle-CssClass="btn btn-danger" HeaderText="Action" ButtonType="Button" />
                 </columns>
 

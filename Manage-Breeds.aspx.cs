@@ -45,8 +45,6 @@ public partial class Manage_Breeds : Base
         else
         {
             displayErrorMessage();
-            // Reloading GridView
-            loadGrid();
         }
 
         // Reseting form
@@ -55,9 +53,6 @@ public partial class Manage_Breeds : Base
         // Displaying success message
         SuccessMessage.Visible = true;
         SuccessText.Text = "New breed was created.";
-
-        // Reloading GridView
-        loadGridLast();
     }
 
     // Reseting form to default state

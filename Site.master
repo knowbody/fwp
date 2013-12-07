@@ -58,7 +58,7 @@
                                 <% if (Session["auth_email"] != null) { %>
                                 <li><a runat="server" href="~/Manage-Pets">Pets Management</a></li>
                                 <% if ((int) Session["access"] == 1) { %>
-                                 <li><a runat="server" href="~/Manage-Users">User Management</a></li>
+                                 <li><a runat="server" href="~/Manage-Staff">Staff Management</a></li>
                                 <% }
                                    } %>
                             </ul>

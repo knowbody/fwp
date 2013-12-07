@@ -32,8 +32,6 @@ public partial class Manage_Spieces : Base
         else
         {
             displayErrorMessage();
-            // Reloading GridView
-            loadGrid();
         }
 
         // Displaying success message
@@ -42,9 +40,6 @@ public partial class Manage_Spieces : Base
 
         // Reseting form
         resetForm();
-
-        // Reloading grid with fresh data
-        loadGridLast();
     }
 
     // Reseting form to default state

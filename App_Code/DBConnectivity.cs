@@ -89,6 +89,35 @@ namespace FWP
             }
         }
 
+        // Add new breed to database
+        public static Boolean addStaff(string[,] staffData)
+        {
+            OleDbConnection myConnection = GetConnection();
+            string myQuery = "INSERT INTO staff (first_name, last_name, email, pass, access) VALUES (?, ?, ?, ?, ?)";
+            OleDbCommand myCommand = new OleDbCommand(myQuery, myConnection);
+            myCommand.Parameters.Add("@first_name", OleDbType.VarWChar, 50).Value = staffData[0, 1];
+            myCommand.Parameters.Add("@last_name", OleDbType.VarWChar, 50).Value = staffData[1, 1];
+            myCommand.Parameters.Add("@email", OleDbType.VarWChar, 50).Value = staffData[2, 1];
+            myCommand.Parameters.Add("@pass", OleDbType.VarWChar, 50).Value = staffData[3, 1];
+            myCommand.Parameters.Add("@access", OleDbType.Integer, 1).Value = staffData[4, 1];
+
+            try
+            {
+                myConnection.Open();
+                myCommand.ExecuteNonQuery();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Exception in DBHandler", ex);
+                return false;
+            }
+            finally
+            {
+                myConnection.Close();
+            }
+        }
+
         // Delete pet in the DB
         public static void DeletePet(string id)
         {
@@ -297,7 +326,7 @@ namespace FWP
                 OleDbDataReader myReader = myCommand.ExecuteReader();
                 while (myReader.Read())
                 {
-                    Staff staff = new Staff(int.Parse(myReader["id"].ToString()), myReader["first_name"].ToString(), myReader["last_name"].ToString(), myReader["email"].ToString(), myReader["password"].ToString(), int.Parse(myReader["access"].ToString()));
+                    Staff staff = new Staff(int.Parse(myReader["id"].ToString()), myReader["first_name"].ToString(), myReader["last_name"].ToString(), myReader["email"].ToString(), myReader["pass"].ToString(), int.Parse(myReader["access"].ToString()));
                     staffs.Add(staff);
                 }
                 return staffs;
@@ -435,7 +464,7 @@ namespace FWP
         public static Staff login(string email, string password)
         {
             OleDbConnection myConnection = GetConnection();
-            string myQuery =  "SELECT * FROM staff WHERE email = '" + email + "' AND password = '" + password + "'";
+            string myQuery =  "SELECT * FROM staff WHERE email = '" + email + "' AND pass = '" + password + "'";
             OleDbCommand myCommand = new OleDbCommand(myQuery, myConnection);
 
             try
@@ -446,7 +475,7 @@ namespace FWP
                 if (myReader.HasRows) {
                     while (myReader.Read())
                     {
-                        return new Staff(int.Parse(myReader["id"].ToString()), myReader["first_name"].ToString(), myReader["last_name"].ToString(), myReader["email"].ToString(), myReader["password"].ToString(), int.Parse(myReader["access"].ToString()));
+                        return new Staff(int.Parse(myReader["id"].ToString()), myReader["first_name"].ToString(), myReader["last_name"].ToString(), myReader["email"].ToString(), myReader["pass"].ToString(), int.Parse(myReader["access"].ToString()));
                     }
                     return null;
                 }
@@ -459,6 +488,38 @@ namespace FWP
             {
                 Console.WriteLine("Exception in DBHandler", ex);
                 return null;
+            }
+            finally
+            {
+                myConnection.Close();
+            }
+        }
+
+        // Method that check if staff email is unique
+        public static Boolean checkEmailUnique(string email)
+        {
+            OleDbConnection myConnection = GetConnection();
+            string myQuery = "SELECT ID FROM staff WHERE email = '" + email + "'";
+            OleDbCommand myCommand = new OleDbCommand(myQuery, myConnection);
+
+            try
+            {
+                myConnection.Open();
+                OleDbDataReader myReader = myCommand.ExecuteReader();
+
+                if (myReader.HasRows)
+                {
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Exception in DBHandler", ex);
+                return true;
             }
             finally
             {

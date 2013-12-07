@@ -19,13 +19,26 @@ public partial class Manage_Users : Base
         // Collecting data
         String pass = TBPassword.Text;
         String passRep = TBPasswordRep.Text;
+        String email = TBEmail.Text;
+
+        // Checking email is unique
+        if (!DBConnectivity.checkEmailUnique(email))
+        {
+            displayErrorMessage("Member with this email is already registered.");
+            return;
+        }
 
         // Checking passwords are same
         if (pass != passRep)
         {
             displayErrorMessage("Passwords are not the same. Please try again.");
-            TBPassword.Text = "";
-            TBPasswordRep.Text = "";
+            return;
+        }
+
+        // Checking if access level was selected
+        if (DDLAccess.SelectedValue == "0")
+        {
+            displayErrorMessage("Please select access level.");
             return;
         }
 
@@ -33,10 +46,25 @@ public partial class Manage_Users : Base
         string[,] staffData = new string[5, 2] { 
             { "first_name", TBFirstName.Text }, 
             { "last_name", TBLastName.Text },
-            { "email", TBEmail.Text },
+            { "email", email },
             { "password", pass },
-            { "access", DDLAccess.SelectedValue.ToString() },
+            { "access", DDLAccess.SelectedValue },
         };
+
+        // Adding new spieces to database
+        Boolean added = DBConnectivity.addStaff(staffData);
+
+        // Checking if record was added
+        if (added)
+        {
+            displaySuccessMessage("Staff member was added successfully");
+            // Reloading GridView
+            loadGridLast();
+        }
+        else
+        {
+            displayErrorMessage("Error adding member. Please try again.");
+        }
     }
 
     // Reseting form to default state

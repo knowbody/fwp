@@ -18,6 +18,10 @@ namespace FWP
         public string email { get; private set; }
         public string pass { get; private set; }
         public int access { get; private set; }
+        public String AccessLevelName
+        {
+            get { return accessLevelIntToStr(access); }
+        }
 
         public Staff(int id, string firstName, string lastName, string email, string pass, int access)
 	    {
@@ -28,5 +32,18 @@ namespace FWP
             this.pass = pass;
             this.access = access;
 	    }
+
+        private String accessLevelIntToStr(int access)
+        {
+            switch (access)
+            {
+                case 1:
+                    return "Administrator";
+                case 2:
+                    return "Moderator";
+                default:
+                    return "Dirty Alien";
+            }
+        }
     }
 }

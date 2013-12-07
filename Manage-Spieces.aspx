@@ -64,7 +64,6 @@
                 autogeneratecolumns="false"
                 emptydatatext="No data available..." 
                 OnRowDeleting="gvSpiecesDetails_OnRowDeleting"
-                OnRowDeleted="gvSpiecesDetails_OnRowDeleted"
                 OnRowDataBound = "gvSpiecesDetails_OnRowDataBound"
                 onpageindexchanging="gvSpiecesDetails_PageIndexChanging">
 

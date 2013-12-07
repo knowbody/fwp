@@ -87,8 +87,6 @@ public partial class Manage_Pets : Base
         else 
         {
             displayErrorMessage();
-            // Reloading GridView
-            loadGrid();
         }
 
         // Reseting form
