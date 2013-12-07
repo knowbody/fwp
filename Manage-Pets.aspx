@@ -73,9 +73,6 @@
                        AssociatedControlID="DDLSanctuary"
                        runat="server" />
                     <asp:DropDownList ID="DDLSanctuary" runat="server">
-                        <asp:ListItem Value="1">Sanctuary 1</asp:ListItem>
-                        <asp:ListItem Value="2">Sanctuary 2</asp:ListItem>
-                        <asp:ListItem Value="3">Sanctuary 3</asp:ListItem>
                     </asp:DropDownList>
                 </div><!-- /.field -->
 

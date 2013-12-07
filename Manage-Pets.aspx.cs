@@ -23,6 +23,12 @@ public partial class Manage_Pets : Page
             DDLSpieces.DataTextField = "name";
             DDLSpieces.DataValueField = "id";
             DDLSpieces.DataBind();
+
+            // Loading sanctuaries dropdownlist
+            DDLSanctuary.DataSource = DBConnectivity.LoadSanctuaries();
+            DDLSanctuary.DataTextField = "name";
+            DDLSanctuary.DataValueField = "id";
+            DDLSanctuary.DataBind();
         }
         loadGrid();
     }

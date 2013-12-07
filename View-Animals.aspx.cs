@@ -67,9 +67,10 @@ public partial class View_Animals : System.Web.UI.Page
                 // Loading sanctuaries to dropdownlist
                 DDLFilter.Attributes.Remove("disabled");
                 DDLFilter.Items.Clear();
-                DDLFilter.Items.Insert(0, new ListItem("Sanctuary 1", "1"));
-                DDLFilter.Items.Insert(1, new ListItem("Sanctuary 2", "2"));
-                DDLFilter.Items.Insert(2, new ListItem("Sanctuary 3", "3"));
+                DDLFilter.DataSource = DBConnectivity.LoadSanctuaries();
+                DDLFilter.DataTextField = "name";
+                DDLFilter.DataValueField = "id";
+                DDLFilter.DataBind();
                 break;
         }
     }

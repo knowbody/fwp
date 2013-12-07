@@ -3,22 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace FWP { 
+namespace FWP 
+{ 
     public class Spieces
     {
-        private int id;
-        public int Id
-        {
-            get { return id; }
-            set { id = value; }
-        }
-
-        private string name;
-        public string Name
-        {
-            get { return name; }
-            set { name = value; }
-        }
+        public int id {get; private set;}
+        public string name { get; private set; }
 
 	    public Spieces(int id, string name)
 	    {

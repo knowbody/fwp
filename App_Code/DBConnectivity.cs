@@ -163,7 +163,7 @@ namespace FWP
         {
             foreach (var spiece in spieces)
             {
-                if (spiece.Id == spieceId)
+                if (spiece.id == spieceId)
                 {
                     return spiece;
                 }
@@ -203,6 +203,37 @@ namespace FWP
                     spieces.Add(spiece);
                 }
                 return spieces;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Exception in DBHandler", ex);
+                return null;
+            }
+            finally
+            {
+                myConnection.Close();
+            }
+        }
+
+        // Method that returns a list of Sanctuary objects with the details from the DB
+        public static List<Sanctuary> LoadSanctuaries()
+        {
+            List<Sanctuary> sancuaries = new List<Sanctuary>();
+            OleDbConnection myConnection = GetConnection();
+
+            string myQuery = "SELECT * FROM sanctuaries";
+            OleDbCommand myCommand = new OleDbCommand(myQuery, myConnection);
+
+            try
+            {
+                myConnection.Open();
+                OleDbDataReader myReader = myCommand.ExecuteReader();
+                while (myReader.Read())
+                {
+                    Sanctuary sanctuary = new Sanctuary(int.Parse(myReader["id"].ToString()), myReader["name"].ToString());
+                    sancuaries.Add(sanctuary);
+                }
+                return sancuaries;
             }
             catch (Exception ex)
             {
