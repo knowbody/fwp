@@ -20,8 +20,9 @@ namespace FWP
         public static Boolean addSpieces(string name)
         {
             OleDbConnection myConnection = GetConnection();
-            string myQuery = "INSERT INTO spieces (name) VALUES ('" + name + "')";
+            string myQuery = "INSERT INTO spieces (name) VALUES (?)";
             OleDbCommand myCommand = new OleDbCommand(myQuery, myConnection);
+            myCommand.Parameters.Add("@name", OleDbType.VarWChar, 50).Value = name;
 
             try
             {
@@ -44,8 +45,12 @@ namespace FWP
         public static Boolean addBreed(string[,] breedData)
         {
             OleDbConnection myConnection = GetConnection();
-            string myQuery = "INSERT INTO breeds (name, spieces_id, food_cost, housing_cost) VALUES ('" + breedData[0, 1] + "', '" + breedData[1, 1] + "', '" + breedData[2, 1] + "', '" + breedData[3, 1] + "')";
+            string myQuery = "INSERT INTO breeds (name, spieces_id, food_cost, housing_cost) VALUES (?, ?, ?, ?)";
             OleDbCommand myCommand = new OleDbCommand(myQuery, myConnection);
+            myCommand.Parameters.Add("@name", OleDbType.VarWChar, 50).Value = breedData[0, 1];
+            myCommand.Parameters.Add("@spieces_id", OleDbType.Integer, 5).Value = breedData[1, 1];
+            myCommand.Parameters.Add("@food_cost", OleDbType.Double, 5).Value = breedData[2, 1];
+            myCommand.Parameters.Add("@housing_cost", OleDbType.Double, 5).Value = breedData[3, 1];
 
             try
             {
@@ -68,9 +73,18 @@ namespace FWP
         public static Boolean addPet(string[,] petData)
         {
             OleDbConnection myConnection = GetConnection();
-            string myQuery = "INSERT INTO pets (name, breed_id, spieces_id, sanctuary_id, age, gender, weight, bills, rescue_date, picture_path)" +
-                             "VALUES ('" + petData[0, 1] + "', '" + petData[1, 1] + "', '" + petData[2, 1] + "', '" + petData[3, 1] + "', '" + petData[4, 1] + "', '" + petData[5, 1] + "', '" + petData[6, 1] + "', '" + petData[7, 1] + "', '" + petData[8, 1] + "', '" + petData[9, 1] + "')";
+            string myQuery = "INSERT INTO pets (name, breed_id, spieces_id, sanctuary_id, age, gender, weight, bills, rescue_date, picture_path) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             OleDbCommand myCommand = new OleDbCommand(myQuery, myConnection);
+            myCommand.Parameters.Add("@name", OleDbType.VarWChar, 50).Value = petData[0, 1];
+            myCommand.Parameters.Add("@breed_id", OleDbType.Integer, 5).Value = petData[1, 1];
+            myCommand.Parameters.Add("@spieces_id", OleDbType.Integer, 5).Value = petData[2, 1];
+            myCommand.Parameters.Add("@sanctuary_id", OleDbType.Integer, 5).Value = petData[3, 1];
+            myCommand.Parameters.Add("@age", OleDbType.Integer, 3).Value = petData[4, 1];
+            myCommand.Parameters.Add("@gender", OleDbType.Integer, 1).Value = petData[5, 1];
+            myCommand.Parameters.Add("@weight", OleDbType.Double, 5).Value = petData[6, 1];
+            myCommand.Parameters.Add("@bills", OleDbType.Double, 5).Value = petData[7, 1];
+            myCommand.Parameters.Add("@rescue_date", OleDbType.DBDate).Value = petData[8, 1];
+            myCommand.Parameters.Add("@picture_path", OleDbType.VarWChar, 50).Value = petData[9, 1];
 
             try
             {
@@ -123,8 +137,9 @@ namespace FWP
         {
             OleDbConnection myConnection = GetConnection();
 
-            string myQuery = "DELETE FROM pets WHERE ID = " + id + "";
+            string myQuery = "DELETE FROM pets WHERE ID = ?";
             OleDbCommand myCommand = new OleDbCommand(myQuery, myConnection);
+            myCommand.Parameters.Add("@ID", OleDbType.Integer, 5).Value = id;
 
             try
             {
@@ -146,8 +161,9 @@ namespace FWP
         {
             OleDbConnection myConnection = GetConnection();
 
-            string myQuery = "DELETE FROM spieces WHERE ID = " + id + "";
+            string myQuery = "DELETE FROM spieces WHERE ID = ?";
             OleDbCommand myCommand = new OleDbCommand(myQuery, myConnection);
+            myCommand.Parameters.Add("@ID", OleDbType.Integer, 5).Value = id;
 
             try
             {
@@ -169,8 +185,9 @@ namespace FWP
         {
             OleDbConnection myConnection = GetConnection();
 
-            string myQuery = "DELETE FROM breeds WHERE ID = " + id + "";
+            string myQuery = "DELETE FROM breeds WHERE ID = ?";
             OleDbCommand myCommand = new OleDbCommand(myQuery, myConnection);
+            myCommand.Parameters.Add("@ID", OleDbType.Integer, 5).Value = id;
 
             try
             {
@@ -192,8 +209,9 @@ namespace FWP
         {
             OleDbConnection myConnection = GetConnection();
 
-            string myQuery = "DELETE FROM staff WHERE ID = " + id + "";
+            string myQuery = "DELETE FROM staff WHERE ID = ?";
             OleDbCommand myCommand = new OleDbCommand(myQuery, myConnection);
+            myCommand.Parameters.Add("@ID", OleDbType.Integer, 5).Value = id;
 
             try
             {
@@ -349,18 +367,23 @@ namespace FWP
             OleDbConnection myConnection = GetConnection();
 
             string myQuery = "";
+            OleDbCommand myCommand;
+
             // Deciding how to load breeds
             switch (by)
             {
                 case "spieces":
-                    myQuery = "SELECT * FROM breeds WHERE spieces_id = " + id;
+                    myQuery = "SELECT * FROM breeds WHERE spieces_id = ?";
+                    myCommand = new OleDbCommand(myQuery, myConnection);
+                    myCommand.Parameters.Add("@spieces_id", OleDbType.Integer, 5).Value = id;
                     break;
                 default:
                     myQuery = "SELECT * FROM breeds";
+                    myCommand = new OleDbCommand(myQuery, myConnection);
                     break;
             }
 
-            OleDbCommand myCommand = new OleDbCommand(myQuery, myConnection);
+            
 
             try
             {
@@ -395,24 +418,31 @@ namespace FWP
             OleDbConnection myConnection = GetConnection();
 
             string myQuery = "";
+            OleDbCommand myCommand;
+
             // Deciding how to load pets
             switch (by)
             {
                 case "breed":
-                    myQuery = "SELECT * FROM pets WHERE breed_id = " + id;
+                    myQuery = "SELECT * FROM pets WHERE breed_id = ?";
+                    myCommand = new OleDbCommand(myQuery, myConnection);
+                    myCommand.Parameters.Add("@breed_id", OleDbType.Integer, 5).Value = id;
                     break;
                 case "spieces":
-                    myQuery = "SELECT * FROM pets WHERE spieces_id = " + id;
+                    myQuery = "SELECT * FROM pets WHERE spieces_id = ?";
+                    myCommand = new OleDbCommand(myQuery, myConnection);
+                    myCommand.Parameters.Add("@spieces_id", OleDbType.Integer, 5).Value = id;
                     break;
                 case "sanctuary":
-                    myQuery = "SELECT * FROM pets WHERE sanctuary_id = " + id;
+                    myQuery = "SELECT * FROM pets WHERE sanctuary_id = ?";
+                    myCommand = new OleDbCommand(myQuery, myConnection);
+                    myCommand.Parameters.Add("@sanctuary_id", OleDbType.Integer, 5).Value = id;
                     break;
                 default:
                     myQuery = "SELECT * FROM pets";
+                    myCommand = new OleDbCommand(myQuery, myConnection);
                     break;
             }
-            
-            OleDbCommand myCommand = new OleDbCommand(myQuery, myConnection);
 
             try
             {
@@ -464,8 +494,10 @@ namespace FWP
         public static Staff login(string email, string password)
         {
             OleDbConnection myConnection = GetConnection();
-            string myQuery =  "SELECT * FROM staff WHERE email = '" + email + "' AND pass = '" + password + "'";
+            string myQuery =  "SELECT * FROM staff WHERE email = ? AND pass = ?";
             OleDbCommand myCommand = new OleDbCommand(myQuery, myConnection);
+            myCommand.Parameters.Add("@email", OleDbType.VarWChar, 50).Value = email;
+            myCommand.Parameters.Add("@pass", OleDbType.VarWChar, 50).Value = password;
 
             try
             {
@@ -499,8 +531,9 @@ namespace FWP
         public static Boolean checkEmailUnique(string email)
         {
             OleDbConnection myConnection = GetConnection();
-            string myQuery = "SELECT ID FROM staff WHERE email = '" + email + "'";
+            string myQuery = "SELECT ID FROM staff WHERE email = ?";
             OleDbCommand myCommand = new OleDbCommand(myQuery, myConnection);
+            myCommand.Parameters.Add("@email", OleDbType.VarWChar, 50).Value = email;
 
             try
             {
