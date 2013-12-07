@@ -377,7 +377,7 @@ namespace FWP
                 if (myReader.HasRows) {
                     while (myReader.Read())
                     {
-                        return new Staff(int.Parse(myReader["id"].ToString()), myReader["first_name"].ToString(), myReader["last_name"].ToString(), myReader["email"].ToString(), myReader["password"].ToString());
+                        return new Staff(int.Parse(myReader["id"].ToString()), myReader["first_name"].ToString(), myReader["last_name"].ToString(), myReader["email"].ToString(), myReader["password"].ToString(), int.Parse(myReader["access"].ToString()));
                     }
                     return null;
                 }

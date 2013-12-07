@@ -10,7 +10,7 @@ public partial class Manage_Spieces : Base
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        checkPermissions();
+        checkPermissions(2);
         loadGrid(); 
     }
 

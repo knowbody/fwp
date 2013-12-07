@@ -57,7 +57,10 @@
                                  <li><a runat="server" href="~/NewClient">New Client</a></li>
                                 <% if (Session["auth_email"] != null) { %>
                                 <li><a runat="server" href="~/Manage-Pets">Pets Management</a></li>
-                                <% } %>
+                                <% if ((int) Session["access"] == 1) { %>
+                                 <li><a runat="server" href="~/Manage-Users">User Management</a></li>
+                                <% }
+                                   } %>
                             </ul>
                             <asp:LoginView runat="server" ViewStateMode="Disabled">
                                 <AnonymousTemplate>

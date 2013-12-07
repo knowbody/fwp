@@ -12,14 +12,16 @@ namespace FWP
         public string lastName { get; private set; }
         public string email { get; private set; }
         public string pass { get; private set; }
+        public int access { get; private set; }
 
-        public Staff(int id, string firstName, string lastName, string email, string pass)
+        public Staff(int id, string firstName, string lastName, string email, string pass, int access)
 	    {
             this.id = id;
             this.firstName = firstName;
             this.lastName = lastName;
             this.email = email;
             this.pass = pass;
+            this.access = access;
 	    }
     }
 }

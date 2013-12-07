@@ -9,12 +9,19 @@ using FWP;
 public class Base : Page
 {
     // Check login
-    public void checkPermissions()
+    public void checkPermissions(int access_zone)
     {
-        // Check if user is logged in
-        if (Session["auth_email"] == null)
+        // Check if user is still logged in
+        if (Session["auth_email"] == null || (int) Session["access"] > access_zone)
         {
+            // Permission are not OK, logging out
+            Session.Clear();
             Response.Redirect("~/");
+        }
+        else
+        {
+            // All OK
+            Session["last_activity"] = DateTime.Now.TimeOfDay;
         }
     }
 }

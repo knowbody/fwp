@@ -4,7 +4,7 @@
 
     <div class="row-fluid">
         <div class="span5">
-            <h4>Our Animals</h4>
+            <h3>Our Animals</h3>
             These is the list of the animals that need your help!
             
         </div><!-- /.span4 -->

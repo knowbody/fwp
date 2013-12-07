@@ -28,6 +28,7 @@ public partial class Account_Login : Page
             // Loging OK
             Session["auth_email"] = account.email;
             Session["first_name"] = account.firstName;
+            Session["access"] = account.access;
             Response.Redirect("~/Manage-Pets");
         }
         else
