@@ -222,7 +222,7 @@
                     <asp:ImageField ControlStyle-Height="55" DataImageUrlField="PicturePath" dataimageurlformatstring="~\img\Upload\{0}" HeaderText="Picture"></asp:ImageField>
                     <asp:boundfield datafield="Breed.Name" headertext="Breed"/>
                     <asp:boundfield datafield="Spieces.Name" headertext="Spieces"/>
-                    <asp:boundfield datafield="sanctuaryName" headertext="Sanctuary"/>
+                    <asp:boundfield datafield="Sanctuary.Name" headertext="Sanctuary"/>
                     <asp:boundfield datafield="Age" headertext="Age"/>
                     <asp:boundfield datafield="GenderString" headertext="Gender"/>
                     <asp:boundfield datafield="WeightKg" headertext="Weight"/>

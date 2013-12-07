@@ -11,11 +11,7 @@ namespace FWP
         public string name {get; private set;}
         public Breed breed {get; private set;}
         public Spieces spieces { get; private set; }
-        public int sanctuary {get; private set;}
-        public String sanctuaryName
-        {
-            get { return sanctuaryIntToString(sanctuary); }
-        }
+        public Sanctuary sanctuary {get; private set;}
 
         public int age { get; private set; }
         public String ageString
@@ -53,7 +49,7 @@ namespace FWP
             get { return ""; }
         }
 
-        public Pet(int id, string name, Breed breed, Spieces spieces, int sanctuary, int age, int gender, double weight, double bills, DateTime rescueD, string picturePath)
+        public Pet(int id, string name, Breed breed, Spieces spieces, Sanctuary sanctuary, int age, int gender, double weight, double bills, DateTime rescueD, string picturePath)
 	    {
             this.id = id;
             this.name = name;
@@ -70,20 +66,6 @@ namespace FWP
 
         public static String genderIntToString(int gender) {
             return (gender == 1) ? "Male" : "Female";
-        }
-
-        public static String sanctuaryIntToString(int sanctuaryId)
-        {
-            switch (sanctuaryId)
-            {
-                case 1:
-                    return "Sanctuary 1";
-                case 2:
-                    return "Sanctuary 2";
-                case 3:
-                    return "Sanctuary 3";
-            }
-            return "";
         }
     }
 }

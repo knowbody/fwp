@@ -171,6 +171,19 @@ namespace FWP
             return null;
         }
 
+        // Search for the specific sanctuary by ID
+        public static Sanctuary FindSanctuary(List<Sanctuary> sanctuaries, int id)
+        {
+            foreach (var sanctuary in sanctuaries)
+            {
+                if (sanctuary.id == id)
+                {
+                    return sanctuary;
+                }
+            }
+            return null;
+        }
+
         // Search for the specific breed by ID
         public static Breed FindBreed(List<Breed> breeds, int breedId)
         {
@@ -325,11 +338,13 @@ namespace FWP
 
                 List<Breed> breeds = LoadBreeds();
                 List<Spieces> spieces = LoadSpieces();
+                List<Sanctuary> sanctuaries = LoadSanctuaries();
 
                 while (myReader.Read())
                 {
                     Breed breed = FindBreed(breeds, int.Parse(myReader["breed_id"].ToString()));
                     Spieces spiece = FindSpieces(spieces, int.Parse(myReader["spieces_id"].ToString()));
+                    Sanctuary sanctuary = FindSanctuary(sanctuaries, int.Parse(myReader["sanctuary_id"].ToString()));
 
                     if (breed != null && spiece != null)
                     {
@@ -337,7 +352,7 @@ namespace FWP
                                           myReader["name"].ToString(),
                                           breed,
                                           spiece,
-                                          int.Parse(myReader["sanctuary_id"].ToString()),
+                                          sanctuary,
                                           int.Parse(myReader["age"].ToString()),
                                           int.Parse(myReader["gender"].ToString()),
                                           double.Parse(myReader["weight"].ToString()),
