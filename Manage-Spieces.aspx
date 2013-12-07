@@ -3,6 +3,12 @@
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <h3>Manage Spieces</h3>
 
+    <div class="row-fluid">
+        <div class="span6">
+            <p>On this page you can create new spieces or delete existing one. All fields are required. Alternatively, to manage pets or breeds, click on the buttons bellow.</p>
+        </div><!-- /.span6 -->
+    </div><!-- /.row-fluid -->
+
     <div class="field-group">
         <asp:Button ID="ButtonPets" runat="server" OnClick="ButtonPets_Click" Text="Manage Pets" CssClass="btn btn-primary btn" CausesValidation="False" />
         <asp:Button ID="ButtonBreeds" runat="server" OnClick="ButtonBreeds_Click" Text="Manage Breeds" CssClass="btn btn-primary btn" CausesValidation="False" />

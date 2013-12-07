@@ -4,6 +4,12 @@
 
     <h3>Manage Pets</h3>
 
+    <div class="row-fluid">
+        <div class="span6">
+            <p>On this page you can create new pets or delete existing ones. All fields are required. Alternatively, to manage spieces or breeds, click on the buttons bellow.</p>
+        </div><!-- /.span6 -->
+    </div><!-- /.row-fluid -->
+
     <div class="field-group">
         <asp:Button ID="ButtonSpieces" runat="server" OnClick="ButtonSpieces_Click" Text="Manage Spieces" CssClass="btn btn-primary btn" CausesValidation="False" />
         <asp:Button ID="ButtonBreeds" runat="server" OnClick="ButtonBreeds_Click" Text="Manage Breeds" CssClass="btn btn-primary btn" CausesValidation="False" />
@@ -11,9 +17,10 @@
 
     <br />
 
-    <div class="row">
+    <div class="row-fluid">
         <div class="span3">
             <h4>Create New Pet</h4>
+
             <div class="field-group">
 
                 <asp:PlaceHolder runat="server" ID="SuccessMessage" Visible="false">

@@ -4,6 +4,12 @@
     <h3>Manage Staff</h3>
 
     <div class="row-fluid">
+        <div class="span5">
+            <p>On this page you can create new staff or delete existing one. All fields are required.</p>
+        </div><!-- /.span6 -->
+    </div><!-- /.row-fluid -->
+
+    <div class="row-fluid">
 
         <div class="span4">
             <h4>Create New Member</h4>
