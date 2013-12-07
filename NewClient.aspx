@@ -46,19 +46,19 @@
             <div class="input-group">
                 <!-- NAME BOX-->
                 <asp:TextBox ID="Name_txtb" runat="server" placeholder="Name" class="form-control"></asp:TextBox>
-                <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="Name_txtb" ErrorMessage="Field Required" ForeColor="Red"></asp:RequiredFieldValidator>
+                <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="Name_txtb" ErrorMessage="*" ForeColor="Red"></asp:RequiredFieldValidator>
                 <asp:RegularExpressionValidator ID="RegularExpressionValidator1" CausesValidation="True" runat="server" ControlToValidate="Name_txtb" ValidationExpression="^[a-zA-Z ]+$" ErrorMessage="RegularExpressionValidator" ForeColor="Red"></asp:RegularExpressionValidator>
                 <br />
                 
                 <!-- EMAIL BOX-->
                 <asp:TextBox ID="Email_txtb" runat="server" placeholder="Email address" class="form-control"></asp:TextBox>
-                <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="Email_txtb" ErrorMessage="Field Required" ForeColor="Red"></asp:RequiredFieldValidator>
+                <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="Email_txtb" ErrorMessage="*" ForeColor="Red"></asp:RequiredFieldValidator>
                 <asp:RegularExpressionValidator ID="RegularExpressionValidator2" CausesValidation="True" runat="server" ControlToValidate="Email_txtb" ValidationExpression="^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$" ErrorMessage="Invalid Email address" ForeColor="Red"></asp:RegularExpressionValidator>
                 <br />
 
                 <!-- ADDRESS BOX-->
                 <asp:TextBox ID="Address_txtb" runat="server" placeholder="Address" class="form-control" rows="3"></asp:TextBox>
-                <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="Address_txtb" ErrorMessage="Field Required" ForeColor="Red"></asp:RequiredFieldValidator>
+                <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="Address_txtb" ErrorMessage="*" ForeColor="Red"></asp:RequiredFieldValidator>
                 <br />
 
                 <!-- COUNTRY BOX-->
@@ -68,7 +68,7 @@
 
                 <!-- TELEPHONE BOX-->
                 <asp:TextBox ID="Tel_txtb" runat="server" placeholder="Telephone number" class="form-control"></asp:TextBox>
-                <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" ControlToValidate="Tel_txtb" ErrorMessage="Field Required" ForeColor="Red"></asp:RequiredFieldValidator>
+                <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" ControlToValidate="Tel_txtb" ErrorMessage="*" ForeColor="Red"></asp:RequiredFieldValidator>
                 <asp:RegularExpressionValidator ID="RegularExpressionValidator4" CausesValidation="True" runat="server" ControlToValidate="Tel_txtb" ValidationExpression="^[0-9]+$" ErrorMessage="Numbers only" ForeColor="Red"></asp:RegularExpressionValidator>
                 <br />
 
@@ -79,7 +79,7 @@
                     <asp:ListItem>€ (euro)</asp:ListItem>
                     <asp:ListItem>Lei</asp:ListItem>
                 </asp:DropDownList>
-                <asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" ControlToValidate="Money_txtb" ErrorMessage="Field Required" ForeColor="Red"></asp:RequiredFieldValidator>
+                <asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" ControlToValidate="Money_txtb" ErrorMessage="*" ForeColor="Red"></asp:RequiredFieldValidator>
                 <asp:RangeValidator ID="RangeValidator1" runat="server" ControlToValidate="Money_txtb" ErrorMessage="Invalid amount" Type="Currency" ForeColor="Red" MinimumValue="0" MaximumValue="9999999999999999"></asp:RangeValidator>
                 <br />
 
