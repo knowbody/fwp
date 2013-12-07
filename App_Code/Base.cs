@@ -19,10 +19,5 @@ public abstract class Base : Page
             Session.Clear();
             Response.Redirect("~/Account/Login.aspx");
         }
-        else
-        {
-            // All OK
-            Session["last_activity"] = DateTime.Now.TimeOfDay;
-        }
     }
 }

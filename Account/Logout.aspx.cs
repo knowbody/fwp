@@ -11,6 +11,6 @@ public partial class Account_Logout : System.Web.UI.Page
     {
         // Destroying sessions and redirecting to main page
         Session.Clear();
-        Response.Redirect("~/");
+        Response.Redirect("~/Account/Login");
     }
 }
