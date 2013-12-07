@@ -106,13 +106,6 @@ public partial class Manage_Spieces : Base
         AppHelper.hideErrorMessage(ErrorMessage, ErrorText);
     }
 
-    // Handling delete button click (deleting record)
-    protected void gvSpiecesDetails_OnRowDeleted(Object sender, GridViewDeletedEventArgs e)
-    {
-        // Displaying success message
-       
-    }
-
     // Binding javascript confirm window to every delete button
     protected void gvSpiecesDetails_OnRowDataBound(object sender, GridViewRowEventArgs e)
     {

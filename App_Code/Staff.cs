@@ -10,6 +10,11 @@ namespace FWP
         public int id {get; private set;} 
         public string firstName {get; private set;}
         public string lastName { get; private set; }
+        public String FullName
+        {
+            get { return firstName + " " + lastName; }
+        }
+
         public string email { get; private set; }
         public string pass { get; private set; }
         public int access { get; private set; }

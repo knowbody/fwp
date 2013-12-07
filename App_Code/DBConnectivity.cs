@@ -158,6 +158,29 @@ namespace FWP
             }
         }
 
+        // Delete staff memeber in the DB
+        public static void DeleteStaff(string id)
+        {
+            OleDbConnection myConnection = GetConnection();
+
+            string myQuery = "DELETE FROM staff WHERE ID = " + id + "";
+            OleDbCommand myCommand = new OleDbCommand(myQuery, myConnection);
+
+            try
+            {
+                myConnection.Open();
+                myCommand.ExecuteReader();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Exception in DBHandler", ex);
+            }
+            finally
+            {
+                myConnection.Close();
+            }
+        }
+
         // Search for the specific spieces by ID
         public static Spieces FindSpieces(List<Spieces> spieces, int spieceId)
         {
@@ -247,6 +270,37 @@ namespace FWP
                     sancuaries.Add(sanctuary);
                 }
                 return sancuaries;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Exception in DBHandler", ex);
+                return null;
+            }
+            finally
+            {
+                myConnection.Close();
+            }
+        }
+
+        // Method that returns a list of Staff objects with the details from the DB
+        public static List<Staff> LoadStaff()
+        {
+            List<Staff> staffs = new List<Staff>();
+            OleDbConnection myConnection = GetConnection();
+
+            string myQuery = "SELECT * FROM staff";
+            OleDbCommand myCommand = new OleDbCommand(myQuery, myConnection);
+
+            try
+            {
+                myConnection.Open();
+                OleDbDataReader myReader = myCommand.ExecuteReader();
+                while (myReader.Read())
+                {
+                    Staff staff = new Staff(int.Parse(myReader["id"].ToString()), myReader["first_name"].ToString(), myReader["last_name"].ToString(), myReader["email"].ToString(), myReader["password"].ToString(), int.Parse(myReader["access"].ToString()));
+                    staffs.Add(staff);
+                }
+                return staffs;
             }
             catch (Exception ex)
             {
