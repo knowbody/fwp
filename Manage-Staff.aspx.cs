@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Security.Cryptography;
+using System.Text;
 using FWP;
 
 public partial class Manage_Users : Base
@@ -41,6 +43,11 @@ public partial class Manage_Users : Base
             displayErrorMessage("Please select access level.");
             return;
         }
+
+        // Hashing password
+        MD5 md5 = new MD5CryptoServiceProvider();
+        md5.ComputeHash(ASCIIEncoding.ASCII.GetBytes(pass));
+        pass = Convert.ToBase64String(md5.Hash);
 
         // Collecting data
         string[,] staffData = new string[5, 2] { 

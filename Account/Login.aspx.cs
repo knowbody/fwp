@@ -5,6 +5,8 @@ using System;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
+using System.Security.Cryptography;
+using System.Text;
 using FWP;
 
 public partial class Account_Login : Page
@@ -19,6 +21,11 @@ public partial class Account_Login : Page
         // Colecting data
         string email = TBEmail.Text;
         string password = TBPass.Text;
+
+        // Hashing password
+        MD5 md5 = new MD5CryptoServiceProvider();
+        md5.ComputeHash(ASCIIEncoding.ASCII.GetBytes(password));
+        password = Convert.ToBase64String(md5.Hash);
 
         // Checking login details
         Staff account = DBConnectivity.login(email, password);
@@ -37,7 +44,5 @@ public partial class Account_Login : Page
             ErrorMessage.Visible = true;
             FailureText.Text = "Bad credentials. Try again.";
         }
-
-        
     }
 }
