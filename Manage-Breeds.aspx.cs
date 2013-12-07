@@ -6,16 +6,11 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using FWP;
 
-public partial class Manage_Breeds : Page
+public partial class Manage_Breeds : Base
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        // Check if user is logged in
-        if (Session["auth_email"] == null)
-        {
-            Response.Redirect("~/");
-        }
-            
+        checkPermissions();
         if (!Page.IsPostBack)
         {
             // Loading spieces dropdownlist

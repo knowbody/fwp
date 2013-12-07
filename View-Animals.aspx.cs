@@ -6,7 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using FWP;
 
-public partial class View_Animals : System.Web.UI.Page
+public partial class View_Animals : Base
 {
     protected void Page_Load(object sender, EventArgs e)
     {
