@@ -29,7 +29,7 @@
                     </asp:DropDownList><br /><br />
 
                     <!-- CHECK BUTTON -->
-                    <asp:Button ID="Check_btn" AutoPostBack="true" OnClick="Check_btn_Click" runat="server" Text="Preview" CssClass="btn btn-primary" /><br /><br />
+                    <asp:Button ID="Check_btn" AutoPostBack="true" OnClick="Check_btn_Click" runat="server" Text="Preview" CssClass="btn btn-primary" CausesValidation="False" /><br /><br />
                 
                     <!-- GRID VIEW WITH PET DETAILS -->
                     <asp:GridView ID="GVPetsDetails" runat="server" CssClass="table table-striped" GridLines="None" CellSpacing="-1"
@@ -42,7 +42,7 @@
                     </asp:GridView><br /><br />
   
                     <!-- CHECKOUT BUTTON -->
-                    <asp:Button ID="Checkout_btn" AutoPostBack="true" OnClick="Checkout_btn_Click" runat="server" Text="Checkout" CssClass="btn btn-primary" Visible="false"/><br /><br />
+                    <asp:Button ID="Checkout_btn" OnClick="Checkout_btn_Click" runat="server" Text="Checkout" CssClass="btn btn-primary" Visible="false"/><br /><br />
               
                 </div><!-- /.field -->
             </div><!-- /.field-group -->
