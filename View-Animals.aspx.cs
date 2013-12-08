@@ -10,10 +10,7 @@ public partial class View_Animals : Base
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (!Page.IsPostBack)
-        {
-            loadGrid();
-        }
+        loadGrid();
     }
 
     // Load grid with fresh data from data source
