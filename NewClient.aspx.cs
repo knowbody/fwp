@@ -32,7 +32,7 @@ public partial class NewClient : System.Web.UI.Page
         string Fame = "False";
 
         // if donated amount bigger than minimum donation set Fame to True
-        if (m > minDonation())
+        if (currency(m) > minDonation())
             Fame = "True";
 
         // if checkbox ticked get the country name from grid view
