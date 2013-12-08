@@ -10,6 +10,10 @@ namespace FWP
         public int id {get; private set;} 
         public string name {get; private set;}
         public Spieces spieces {get; private set;}
+        public String NameWithSpieces
+        {
+            get { return name + " (" + spieces.name + ")"; }
+        }
 
         public double foodCost { get; private set; }
         public String FormatedFoodCost

@@ -20,8 +20,8 @@
                         OnSelectedIndexChanged="DDLViewBy_OnSelectedIndexChanged"
                         runat="server">
                         <asp:ListItem Value="0">Select view by...</asp:ListItem>
-                        <asp:ListItem Value="1">Breeds</asp:ListItem>
                         <asp:ListItem Value="2">Spieces</asp:ListItem>
+                        <asp:ListItem Value="1">Breeds</asp:ListItem>
                         <asp:ListItem Value="3">Sanctuary</asp:ListItem>
                     </asp:DropDownList>
 

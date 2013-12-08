@@ -50,7 +50,7 @@ public partial class View_Animals : Base
                 DDLFilter.Attributes.Remove("disabled");
                 DDLFilter.Items.Clear();
                 DDLFilter.DataSource = DBConnectivity.LoadBreeds();
-                DDLFilter.DataTextField = "name";
+                DDLFilter.DataTextField = "NameWithSpieces";
                 DDLFilter.DataValueField = "id";
                 DDLFilter.DataBind();
                 break;
