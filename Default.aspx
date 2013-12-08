@@ -1,42 +1,81 @@
-﻿<%@ Page Title="Home Page" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeFile="Default.aspx.cs" Inherits="_Default" %>
+﻿<%@ Page Title="Our Animals" Language="C#" AutoEventWireup="true" MasterPageFile="~/Site.Master" CodeFile="Default.aspx.cs" Inherits="Default" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
 
-    <div class="hero-unit">
-        <h1>ASP.NET</h1>
-        <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS, and JavaScript.</p>
-        <p><a href="http://www.asp.net" class="btn btn-primary btn-large">Learn more &raquo;</a></p>
-    </div>
+    <div class="row-fluid">
+        <div class="span5">
+            <h3>Our Animals</h3>
+            These is the list of the animals that need your help!
+            
+        </div><!-- /.span4 -->
 
-    <div class="row">
         <div class="span4">
-            <h2>Getting started</h2>
-            <p>
-                ASP.NET Web Forms lets you build dynamic websites using a familiar drag-and-drop, event-driven model.
-            A design surface and hundreds of controls and components let you rapidly build sophisticated, powerful UI-driven sites with data access.
-            </p>
-            <p>
-                <a class="btn" href="http://go.microsoft.com/fwlink/?LinkId=301948">Learn more &raquo;</a>
-            </p>
-        </div>
-        <div class="span4">
-            <h2>Get more libraries</h2>
-            <p>
-                NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.
-            </p>
-            <p>
-                <a class="btn" href="http://go.microsoft.com/fwlink/?LinkId=301949">Learn more &raquo;</a>
-            </p>
-        </div>
-        <div class="span4">
-            <h2>Web Hosting</h2>
-            <p>
-                You can easily find a web hosting company that offers the right mix of features and price for your applications.
-            </p>
-            <p>
-                <a class="btn" href="http://go.microsoft.com/fwlink/?LinkId=301950">Learn more &raquo;</a>
-            </p>
-        </div>
-    </div>
+            <h4>View By</h4>
+
+            <div class="field-group">
+
+                <div class="field">
+                    <asp:DropDownList ID="DDLViewBy" 
+                        AutoPostBack="true" style="float:left;"
+                        OnSelectedIndexChanged="DDLViewBy_OnSelectedIndexChanged"
+                        runat="server">
+                        <asp:ListItem Value="0">Select view by...</asp:ListItem>
+                        <asp:ListItem Value="2">Spieces</asp:ListItem>
+                        <asp:ListItem Value="1">Breeds</asp:ListItem>
+                        <asp:ListItem Value="3">Sanctuary</asp:ListItem>
+                    </asp:DropDownList>
+
+                    <asp:DropDownList ID="DDLFilter" 
+                        runat="server">
+                        <asp:ListItem Value="0">...</asp:ListItem>
+                    </asp:DropDownList>
+                    </div><!-- /.field -->
+                <div class="field">
+                    <asp:Button ID="BFilter" 
+                        OnClick="BFiltert_Click" 
+                        runat="server" 
+                        Text="Filter" 
+                        CssClass="btn btn-primary" />
+                </div><!-- /.field -->
+
+            </div><!-- /.field-group -->
+            
+        </div><!-- /.span8 -->
+
+    </div><!-- /.row-fluid -->
+
+    <br />
+
+    <div class="row-fluid">
+
+        <div class="span12">
+
+            <asp:PlaceHolder runat="server" ID="WarningMessage" Visible="false">
+                    <div class="alert alert-warning" style="width:320px;">
+                        <asp:Literal runat="server" ID="WarningText" />
+                    </div>
+            </asp:PlaceHolder>
+            <asp:GridView ID="GVPetsDetails" runat="server" CssClass="table table-striped" GridLines="None" CellSpacing="-1"
+                autogeneratecolumns="false"
+                emptydatatext="No records..."
+                onpageindexchanging="GVPetsDetails_PageIndexChanging" >
+
+                <columns>
+                    <asp:boundfield datafield="Name" headertext="Name"/>
+                    <asp:ImageField ControlStyle-Height="90" DataImageUrlField="PicturePath" dataimageurlformatstring="~\img\Upload\{0}" HeaderText="Picture"></asp:ImageField>
+                    <asp:boundfield datafield="Breed.Name" headertext="Breed"/>
+                    <asp:boundfield datafield="Spieces.Name" headertext="Spieces"/>
+                    <asp:boundfield datafield="Sanctuary.Name" headertext="Sanctuary"/>
+                    <asp:boundfield datafield="ageString" headertext="Age"/>
+                    <asp:boundfield datafield="GenderString" headertext="Gender"/>
+                    <asp:boundfield datafield="WeightKg" headertext="Weight"/>
+                    <asp:boundfield datafield="RescueDShort" headertext="Rescue date"/>
+                </columns>
+
+            </asp:GridView>
+           
+        </div><!-- /.span12 -->
+
+    </div><!-- /.row-flui -->
 
 </asp:Content>
