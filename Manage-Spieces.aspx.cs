@@ -126,4 +126,9 @@ public partial class Manage_Spieces : Base
         Response.Redirect("Manage-Breeds");
     }
 
+    protected void ButtonDonation_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("Donation");
+    }
+
 }

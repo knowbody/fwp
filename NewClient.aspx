@@ -91,10 +91,7 @@
 
                 <!-- ADD BUTTON -->
                 <asp:Button ID="Adopt_btn" runat="server" Text="Adopt" class="btn btn-primary btn" OnClick="Adopt_btn_Click" />
-                <br /><br />
-                <asp:Label ID="TotalD_lbl" runat="server"></asp:Label>
             </div><!-- /input-group -->
         </div><!-- /.span6 -->
     </div><!-- /.row -->
 </asp:Content>
-

@@ -42,7 +42,7 @@ public partial class Manage_Pets : Base
 
         // Checking file extension
         string fileExt = System.IO.Path.GetExtension(FileUploadPicture.FileName);
-        if (fileExt == ".jpeg" || fileExt == ".jpg"  || fileExt == ".png")
+        if (fileExt == ".jpeg" || fileExt == ".jpg" || fileExt == ".png")
         {
             // Uploading picture
             FileUploadPicture.SaveAs(AppDomain.CurrentDomain.BaseDirectory + "img/Upload/" + FileUploadPicture.FileName);
@@ -85,7 +85,7 @@ public partial class Manage_Pets : Base
             // Reloading GridView
             loadGridLast();
         }
-        else 
+        else
         {
             displayErrorMessage("Error while creating pet. Please try again.");
         }
@@ -106,7 +106,7 @@ public partial class Manage_Pets : Base
         TBWeight.Text = "";
         TBBills.Text = "";
         CalendarRescue.VisibleDate = DateTime.Today;
-        CalendarRescue.SelectedDates.Clear(); 
+        CalendarRescue.SelectedDates.Clear();
     }
 
     private void displaySuccessMessage(string message)
@@ -223,6 +223,11 @@ public partial class Manage_Pets : Base
     protected void ButtonBreeds_Click(object sender, EventArgs e)
     {
         Response.Redirect("Manage-Breeds");
+    }
+
+    protected void ButtonDonation_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("Donation");
     }
 
 }

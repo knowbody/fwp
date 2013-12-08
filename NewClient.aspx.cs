@@ -46,6 +46,9 @@ public partial class NewClient : System.Web.UI.Page
 
         // assigning adoption date in pets table
         DBConnectivity.adoptPet(DDLPet.SelectedValue, DateTime.Now);
+
+        // redirect to thank you page
+        Response.Redirect("ThankYou");
     }
 
     // reaction after clicking Check button
@@ -73,9 +76,6 @@ public partial class NewClient : System.Web.UI.Page
 
         // tick countries check box
         Country_chb.Checked = true;
-
-        // Total money donated
-        TotalD_lbl.Text = "TOTAL MONEY DONATED: £" + Convert.ToString(DBConnectivity.getMoney());
 
         // show form to the user
         showClient();

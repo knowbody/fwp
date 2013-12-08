@@ -54,7 +54,8 @@
                             <ul class="nav nav-pills nav-stacked">
                                 <li><a runat="server" href="~/">Home</a></li>
                                 <li><a runat="server" href="~/View-Animals">Our Animals</a></li>
-                                 <li><a runat="server" href="~/NewClient">New Client</a></li>
+                                <li><a runat="server" href="~/NewClient">Adopt a pet</a></li>
+                                <li><a runat="server" href="~/HallOfFame">Hall Of Fame</a></li>
                                 <% if (Session["auth_email"] != null) { %>
                                 <li><a runat="server" href="~/Manage-Pets">Pets Management</a></li>
                                 <% if ((int) Session["access"] == 1) { %>

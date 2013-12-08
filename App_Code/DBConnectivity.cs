@@ -418,7 +418,42 @@ namespace FWP
             List<Client> clients = new List<Client>();
             OleDbConnection myConnection = GetConnection();
 
-            string myQuery = "SELECT * FROM Client WHERE Fame = 'True'";
+            string myQuery = "SELECT DISTINCT * FROM Client WHERE Fame = 'True'";
+            OleDbCommand myCommand = new OleDbCommand(myQuery, myConnection);
+
+            try
+            {
+                myConnection.Open();
+                OleDbDataReader myReader = myCommand.ExecuteReader();
+
+                while (myReader.Read())
+                {
+                    Client client = new Client(int.Parse(myReader["ID"].ToString()), myReader["Name"].ToString(),
+                                          myReader["Email"].ToString(), myReader["Address"].ToString(),
+                                          myReader["Telephone"].ToString(), DateTime.Parse(myReader["Ddate"].ToString()),
+                                          myReader["Donation"].ToString(), myReader["Country"].ToString(),
+                                          myReader["Fame"].ToString());
+                    clients.Add(client);
+                }
+                return clients;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Exception in DBHandler", ex);
+                return null;
+            }
+            finally
+            {
+                myConnection.Close();
+            }
+        }
+
+        public static List<Client> LoadDonations()
+        {
+            List<Client> clients = new List<Client>();
+            OleDbConnection myConnection = GetConnection();
+
+            string myQuery = "SELECT * FROM Client";
             OleDbCommand myCommand = new OleDbCommand(myQuery, myConnection);
 
             try

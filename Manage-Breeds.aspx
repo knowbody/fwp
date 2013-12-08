@@ -13,6 +13,7 @@
     <div class="field-group">
         <asp:Button ID="ButtonPets" runat="server" OnClick="ButtonPets_Click" Text="Manage Pets" CssClass="btn btn-primary btn" CausesValidation="False" />
         <asp:Button ID="ButtonSpieces" runat="server" OnClick="ButtonSpieces_Click" Text="Manage Spieces" CssClass="btn btn-primary btn" CausesValidation="False" />
+        <asp:Button ID="ButtonDonation" runat="server" OnClick="ButtonDonation_Click" Text="Donation overview" CssClass="btn btn-primary btn" CausesValidation="False" />
     </div><!-- /.field-group -->
 
     <br />
