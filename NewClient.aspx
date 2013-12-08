@@ -9,37 +9,41 @@
             <h4>Select by:</h4>
             <div class="field-group">
                 <div class="field">
-                    <asp:DropDownList ID="DDLViewBy" 
-                        AutoPostBack="true" style="float:left;"
-                        OnSelectedIndexChanged="DDLViewBy_OnSelectedIndexChanged"
-                        runat="server">
+                    <!-- SELECT (breed, spieces, sanctuary) DROP DOWN LIST -->
+                    <asp:DropDownList ID="DDLViewBy" AutoPostBack="true" OnSelectedIndexChanged="DDLViewBy_OnSelectedIndexChanged" runat="server">
                         <asp:ListItem Value="0">Select by...</asp:ListItem>
                         <asp:ListItem Value="1">Breeds</asp:ListItem>
                         <asp:ListItem Value="2">Spieces</asp:ListItem>
                         <asp:ListItem Value="3">Sanctuary</asp:ListItem>
-                    </asp:DropDownList><br /><br />
+                    </asp:DropDownList><br />
 
-                    <asp:DropDownList ID="DDLFilter"
-                        AutoPostBack="true" style="float: left;"
-                        OnSelectedIndexChanged="DDLFilter_OnSelectedIndexChanged" 
-                        runat="server">
+                    <!-- SELECT (based on the above) DROP DOWN LIST -->
+                    <asp:DropDownList ID="DDLFilter" AutoPostBack="true" OnSelectedIndexChanged="DDLFilter_OnSelectedIndexChanged" runat="server">
                         <asp:ListItem Value="0">...</asp:ListItem>
-                    </asp:DropDownList><br /><br />
+                    </asp:DropDownList><br />
 
+                    <!-- SELECT (particular pet by name) DROP DOWN LIST -->
                     <asp:DropDownList ID="DDLPet" 
                         runat="server">
                         <asp:ListItem Value="0">...</asp:ListItem>
                     </asp:DropDownList><br /><br />
 
-                    
-
-                </div><!-- /.field -->
-                <div class="field">
-                    <asp:Button ID="Adopt_btn" 
-                        OnClick="Adopt_btn_Click" 
-                        runat="server" 
-                        Text="Adopt" 
-                        CssClass="btn btn-primary" />
+                    <!-- CHECK BUTTON -->
+                    <asp:Button ID="Check_btn" AutoPostBack="true" OnClick="Check_btn_Click" runat="server" Text="Preview" CssClass="btn btn-primary" /><br /><br />
+                
+                    <!-- GRID VIEW WITH PET DETAILS -->
+                    <asp:GridView ID="GVPetsDetails" runat="server" CssClass="table table-striped" GridLines="None" CellSpacing="-1"
+                        autogeneratecolumns="false">
+                        <columns>
+                            <asp:ImageField ControlStyle-Height="200" DataImageUrlField="PicturePath" dataimageurlformatstring="~\img\Upload\{0}"></asp:ImageField>
+                            <asp:boundfield datafield="Name" headertext="Name"/>
+                            <asp:boundfield datafield="Sanctuary.Name" headertext="Sanctuary"/>
+                        </columns>
+                    </asp:GridView><br /><br />
+  
+                    <!-- CHECKOUT BUTTON -->
+                    <asp:Button ID="Checkout_btn" AutoPostBack="true" OnClick="Checkout_btn_Click" runat="server" Text="Checkout" CssClass="btn btn-primary" Visible="false"/><br /><br />
+              
                 </div><!-- /.field -->
             </div><!-- /.field-group -->
         </div><!-- /.span6 -->
@@ -86,7 +90,7 @@
                 <br />
 
                 <!-- ADD BUTTON -->
-                <asp:Button ID="AddClient_btn" runat="server" Text="Add New Client" class="btn btn-primary btn" OnClick="AddClient_btn_Click" />
+                <asp:Button ID="Adopt_btn" runat="server" Text="Adopt" class="btn btn-primary btn" OnClick="Adopt_btn_Click" />
                 <br /><br />
                 <asp:Label ID="TotalD_lbl" runat="server"></asp:Label>
             </div><!-- /input-group -->

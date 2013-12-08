@@ -19,6 +19,7 @@ public class Client
     public string tel;
     public string money;
     public DateTime date;
+    public string fame;
     public string Name
     {
         get { return name; }
@@ -40,6 +41,11 @@ public class Client
         get { return country; }
         set { country = value; }
     }
+    public string Fame
+    {
+        get { return fame; }
+        set { fame = value; }
+    }
     public string Tel
     {
         get { return tel; }
@@ -56,7 +62,7 @@ public class Client
         set { money = value; }
     }
 
-    public Client(int id, string name, string email, string address, DateTime date, string money)
+    public Client(int id, string name, string email, string address, string tel, DateTime date, string money, string country, string fame)
     {
         this.id = id;
         this.name = name;
@@ -65,6 +71,8 @@ public class Client
         this.tel = tel;
         this.date = date;
         this.money = money;
+        this.country = country;
+        this.fame = fame;
     }
 }
 

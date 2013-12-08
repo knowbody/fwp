@@ -37,6 +37,7 @@ namespace FWP
             }
             finally
             {
+                // if (myConnection != null)    <-- I think that's how we should do close connection
                 myConnection.Close();
             }
         }
@@ -411,6 +412,43 @@ namespace FWP
             }
         }
 
+        // Method that returns a list of Clients objects with the details from the DB
+        public static List<Client> LoadClient()
+        {
+            List<Client> clients = new List<Client>();
+            OleDbConnection myConnection = GetConnection();
+
+            string myQuery = "SELECT * FROM Client WHERE Fame = 'True'";
+            OleDbCommand myCommand = new OleDbCommand(myQuery, myConnection);
+
+            try
+            {
+                myConnection.Open();
+                OleDbDataReader myReader = myCommand.ExecuteReader();
+
+                while (myReader.Read())
+                {
+                    Client client = new Client(int.Parse(myReader["ID"].ToString()), myReader["Name"].ToString(),
+                                          myReader["Email"].ToString(), myReader["Address"].ToString(),
+                                          myReader["Telephone"].ToString(), DateTime.Parse(myReader["Ddate"].ToString()),
+                                          myReader["Donation"].ToString(), myReader["Country"].ToString(),
+                                          myReader["Fame"].ToString());
+                    clients.Add(client);
+                }
+                return clients;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Exception in DBHandler", ex);
+                return null;
+            }
+            finally
+            {
+                myConnection.Close();
+            }
+
+        }
+
         // Method that returns a list of Pets objects with the details from the DB
         public static List<Pet> LoadPets(string by = "", string id = "")
         {
@@ -420,23 +458,28 @@ namespace FWP
             string myQuery = "";
             OleDbCommand myCommand;
 
-            // Deciding how to load pets
+            // Deciding how to load pets (if there is adoption date in db - don't show the pet)
             switch (by)
             {
                 case "breed":
-                    myQuery = "SELECT * FROM pets WHERE breed_id = ?";
+                    myQuery = "SELECT * FROM pets WHERE breed_id = ? AND adoption_date IS NULL";
                     myCommand = new OleDbCommand(myQuery, myConnection);
                     myCommand.Parameters.Add("@breed_id", OleDbType.Integer, 5).Value = id;
                     break;
                 case "spieces":
-                    myQuery = "SELECT * FROM pets WHERE spieces_id = ?";
+                    myQuery = "SELECT * FROM pets WHERE spieces_id = ? AND adoption_date IS NULL";
                     myCommand = new OleDbCommand(myQuery, myConnection);
                     myCommand.Parameters.Add("@spieces_id", OleDbType.Integer, 5).Value = id;
                     break;
                 case "sanctuary":
-                    myQuery = "SELECT * FROM pets WHERE sanctuary_id = ?";
+                    myQuery = "SELECT * FROM pets WHERE sanctuary_id = ? AND adoption_date IS NULL";
                     myCommand = new OleDbCommand(myQuery, myConnection);
                     myCommand.Parameters.Add("@sanctuary_id", OleDbType.Integer, 5).Value = id;
+                    break;
+                case "pet": // find particular pet based on ID
+                    myQuery = "SELECT * FROM pets WHERE ID = ? AND adoption_date IS NULL";
+                    myCommand = new OleDbCommand(myQuery, myConnection);
+                    myCommand.Parameters.Add("@ID", OleDbType.Integer, 5).Value = id;
                     break;
                 default:
                     myQuery = "SELECT * FROM pets";
@@ -489,6 +532,8 @@ namespace FWP
                 myConnection.Close();
             }
         }
+
+
 
         // Method that checks login details
         public static Staff login(string email, string password)
@@ -560,10 +605,10 @@ namespace FWP
             }
         }
 
-        public static Client addClient(string name, string email, string address, string tel, DateTime date, string money, string country)
+        public static Client addClient(string name, string email, string address, string tel, DateTime date, string money, string country, string fame)
         {
             OleDbConnection myConnection = GetConnection();
-            string myQuery = "INSERT INTO Client (Name, Email, Address, Telephone, Ddate, Donation, Country) VALUES ('" + name + "', '" + email + "', '" + address + "', '" + tel + "', '" + date + "', '" + money + "', '" + country + "')";
+            string myQuery = "INSERT INTO Client (Name, Email, Address, Telephone, Ddate, Donation, Country, Fame) VALUES ('" + name + "', '" + email + "', '" + address + "', '" + tel + "', '" + date + "', '" + money + "', '" + country + "', '" + fame + "')";
             OleDbCommand myCommand = new OleDbCommand(myQuery, myConnection);
 
             try
@@ -604,6 +649,30 @@ namespace FWP
             {
                 Console.WriteLine("Exception in DBHandler", ex);
                 return money;
+            }
+            finally
+            {
+                myConnection.Close();
+            }
+        }
+
+
+        public static void adoptPet(string id, DateTime adoDate)
+        {
+            OleDbConnection myConnection = GetConnection();
+
+            string myQuery = "UPDATE pets SET adoption_date=\"" + adoDate + "\" WHERE ID = ?";
+            OleDbCommand myCommand = new OleDbCommand(myQuery, myConnection);
+            myCommand.Parameters.Add("@ID", OleDbType.Integer, 5).Value = id;
+
+            try
+            {
+                myConnection.Open();
+                myCommand.ExecuteReader();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Exception in DBHandler", ex);
             }
             finally
             {
